@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Zenith Finance 360 — Control total de tus finanzas</title>
   <meta name="description" content="App de finanzas personales con privacidad total. Dashboard inteligente, semáforo de gastos, coach financiero y metas. Todos tus datos se quedan en tu dispositivo.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
@@ -36,8 +38,8 @@
     /* Nav */
     .hero-nav { position: relative; z-index: 10; padding: 20px 24px; max-width: 1280px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; }
     .nav-brand { display: flex; align-items: center; gap: 10px; }
-    .nav-logo-icon { width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center; }
-    .nav-logo-icon::after { content: ''; width: 14px; height: 14px; border-radius: 50%; background: linear-gradient(135deg, #5b8aff, #c180ff); }
+    .nav-logo-icon { width: 36px; height: 36px; border-radius: 10px; overflow: hidden; }
+    .nav-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
     .nav-brand-text { font-size: 1.1rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
     .nav-pill { display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 99px; padding: 6px 8px; }
     .nav-pill a { color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 500; text-decoration: none; padding: 6px 14px; border-radius: 99px; transition: all 0.2s; }
@@ -159,7 +161,7 @@
     <!-- Nav -->
     <nav class="hero-nav">
       <div class="nav-brand">
-        <div class="nav-logo-icon"></div>
+        <div class="nav-logo-icon"><img src="logo.png" alt="Zenith Finance 360" width="36" height="36"></div>
         <span class="nav-brand-text">Zenith Finance 360</span>
       </div>
       <div class="nav-pill">
@@ -276,6 +278,7 @@
 
   <!-- ════════ FOOTER ════════ -->
   <footer>
+    <img src="logo.png" alt="Zenith Finance 360" width="48" height="48" style="border-radius:12px;margin-bottom:12px;">
     <p>&copy; 2026 Zenith Finance 360. Todos los derechos reservados.</p>
     <a href="privacy.html">Política de Privacidad</a>
   </footer>
