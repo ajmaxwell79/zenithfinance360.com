@@ -6,155 +6,304 @@
   <title>Zenith Finance 360 — Control total de tus finanzas</title>
   <meta name="description" content="App de finanzas personales con privacidad total. Dashboard inteligente, semáforo de gastos, coach financiero y metas. Todos tus datos se quedan en tu dispositivo.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background: #030612; color: #e2e4f9; line-height: 1.6; overflow-x: hidden; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: #000; color: #fff; line-height: 1.6; overflow-x: hidden; }
 
-    /* Background */
-    .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
-      background: radial-gradient(ellipse 900px 500px at 15% 10%, rgba(37,99,235,0.15), transparent 60%),
-                  radial-gradient(ellipse 700px 400px at 85% 5%, rgba(139,92,246,0.12), transparent 60%),
-                  radial-gradient(ellipse 600px 400px at 20% 90%, rgba(16,185,129,0.08), transparent 55%); }
+    /* ── Hero Section ── */
+    .hero-section { position: relative; min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    /* Animated gradient background */
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg::before { content: ''; position: absolute; inset: 0; background: #000; }
+    .hero-bg::after { content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 800px 600px at 20% 50%, rgba(59,110,247,0.18), transparent 70%),
+        radial-gradient(ellipse 600px 500px at 80% 30%, rgba(139,92,246,0.14), transparent 70%),
+        radial-gradient(ellipse 900px 400px at 50% 80%, rgba(16,185,129,0.10), transparent 70%);
+      animation: bgPulse 8s ease-in-out infinite alternate;
+    }
+    @keyframes bgPulse {
+      0% { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* Animated mesh grid */
+    .hero-mesh { position: absolute; inset: 0; z-index: 1; opacity: 0.04;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: meshMove 20s linear infinite;
+    }
+    @keyframes meshMove {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(60px, 60px); }
+    }
+
+    /* Floating orbs */
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); z-index: 1; animation: orbFloat 12s ease-in-out infinite alternate; }
+    .orb-1 { width: 400px; height: 400px; background: rgba(59,110,247,0.15); top: -100px; left: -100px; }
+    .orb-2 { width: 350px; height: 350px; background: rgba(139,92,246,0.12); bottom: -50px; right: -80px; animation-delay: -4s; animation-duration: 15s; }
+    .orb-3 { width: 250px; height: 250px; background: rgba(16,185,129,0.10); top: 40%; left: 60%; animation-delay: -8s; animation-duration: 18s; }
+    @keyframes orbFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -20px) scale(1.1); }
+      66% { transform: translate(-20px, 30px) scale(0.95); }
+      100% { transform: translate(15px, -15px) scale(1.05); }
+    }
 
     /* Nav */
-    nav { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; }
-    .nav-logo { font-size: 1.2rem; font-weight: 700; color: #90abff; }
-    .nav-links a { color: #a7aabe; font-size: 0.85rem; text-decoration: none; margin-left: 24px; transition: color 0.2s; }
-    .nav-links a:hover { color: #90abff; }
+    .hero-nav { position: relative; z-index: 10; padding: 20px 24px; max-width: 1280px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon { width: 36px; height: 36px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center; }
+    .nav-logo-icon::after { content: ''; width: 14px; height: 14px; border-radius: 50%; background: linear-gradient(135deg, #5b8aff, #c180ff); }
+    .nav-brand-text { font-size: 1.1rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+    .nav-pill { display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 99px; padding: 6px 8px; }
+    .nav-pill a { color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 500; text-decoration: none; padding: 6px 14px; border-radius: 99px; transition: all 0.2s; }
+    .nav-pill a:hover { color: #fff; background: rgba(255,255,255,0.08); }
+    .nav-pill a.nav-cta { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); display: flex; align-items: center; gap: 4px; }
+    .nav-pill a.nav-cta:hover { background: rgba(255,255,255,0.18); color: #fff; }
+    .nav-hamburger { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
 
-    /* Hero */
-    .hero { text-align: center; padding: 60px 0 40px; }
-    .badge { display: inline-block; background: rgba(144,171,255,0.1); border: 1px solid rgba(144,171,255,0.2); border-radius: 99px; padding: 6px 16px; font-size: 0.75rem; font-weight: 600; color: #90abff; margin-bottom: 24px; letter-spacing: 0.5px; }
-    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; color: #f1f5f9; line-height: 1.15; margin-bottom: 20px; }
-    .hero h1 span { background: linear-gradient(135deg, #5b8aff, #c180ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero p { font-size: 1.1rem; color: #a7aabe; max-width: 560px; margin: 0 auto 40px; }
-    .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 14px; font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; }
-    .btn-primary { background: linear-gradient(140deg, #3b6ef7, #1a3bc2); color: #fff; box-shadow: 0 4px 20px rgba(27,59,194,0.4); }
-    .btn-primary:hover { box-shadow: 0 8px 30px rgba(27,59,194,0.55); transform: translateY(-2px); }
-    .btn-secondary { background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1); }
-    .btn-secondary:hover { background: rgba(255,255,255,0.1); color: #f1f5f9; }
+    /* Hero top bar — stats */
+    .hero-topbar { position: relative; z-index: 10; max-width: 1280px; margin: 0 auto; width: 100%; padding: 40px 24px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+    .hero-topbar p { color: rgba(255,255,255,0.6); font-size: 0.85rem; max-width: 380px; line-height: 1.5; }
+    .hero-topbar .stat { text-align: right; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 500; }
+    .hero-topbar .stat strong { display: block; font-size: 1.1rem; color: #fff; font-weight: 700; }
 
-    /* Features */
-    .features { padding: 80px 0; }
-    .features-header { text-align: center; margin-bottom: 60px; }
-    .features-header h2 { font-size: 1.8rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
-    .features-header p { color: #a7aabe; font-size: 1rem; }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-    .feature-card { background: rgba(16,20,38,0.65); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 28px; transition: border-color 0.2s, transform 0.2s; }
-    .feature-card:hover { border-color: rgba(144,171,255,0.2); transform: translateY(-4px); }
-    .feature-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px; }
-    .feature-card h3 { font-size: 1rem; font-weight: 700; color: #f1f5f9; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; color: #a7aabe; line-height: 1.5; }
+    /* Hero center */
+    .hero-center { position: relative; z-index: 10; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px; }
+    .hero-pretitle { text-transform: uppercase; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+    .hero-pretitle .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #34d399; margin-right: 8px; animation: dotPulse 2s ease-in-out infinite; }
+    @keyframes dotPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-    .icon-blue { background: rgba(59,110,247,0.15); color: #5b8aff; }
-    .icon-green { background: rgba(16,185,129,0.15); color: #34d399; }
-    .icon-purple { background: rgba(139,92,246,0.15); color: #c180ff; }
-    .icon-amber { background: rgba(245,158,11,0.15); color: #fbbf24; }
-    .icon-rose { background: rgba(244,63,94,0.15); color: #fb7185; }
-    .icon-teal { background: rgba(20,184,166,0.15); color: #2dd4bf; }
+    .hero-heading { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 32px; }
+    .hero-heading .line1 { display: block; color: #fff; font-weight: 500; }
+    .hero-heading .line2 { display: block; }
 
-    /* Privacy banner */
-    .privacy-banner { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.15); border-radius: 20px; padding: 40px; text-align: center; margin: 40px 0 80px; }
-    .privacy-banner h2 { font-size: 1.5rem; color: #34d399; margin-bottom: 12px; }
-    .privacy-banner p { color: #a7aabe; max-width: 520px; margin: 0 auto; font-size: 0.95rem; }
+    /* Shiny text animation */
+    .shiny-text { background: linear-gradient(
+      100deg,
+      #64CEFB 0%,
+      #64CEFB 40%,
+      #ffffff 50%,
+      #64CEFB 60%,
+      #64CEFB 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shinySlide 3s linear infinite;
+    }
+    @keyframes shinySlide {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
+    }
 
-    /* Footer */
-    footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 32px 0; text-align: center; }
-    footer p { font-size: 0.8rem; color: #717487; margin-bottom: 8px; }
-    footer a { color: #717487; text-decoration: none; font-size: 0.8rem; }
-    footer a:hover { color: #90abff; }
+    .hero-subtitle { color: rgba(255,255,255,0.5); font-size: clamp(0.9rem, 1.5vw, 1.1rem); max-width: 500px; margin-bottom: 40px; font-weight: 400; }
 
+    /* CTA button */
+    .hero-cta { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #000; font-size: 0.95rem; font-weight: 700; padding: 16px 32px; border-radius: 99px; text-decoration: none; transition: all 0.3s; border: none; cursor: pointer; }
+    .hero-cta:hover { background: #e2e8f0; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,255,255,0.15); }
+    .hero-cta .arrow { display: inline-flex; transition: transform 0.3s; }
+    .hero-cta:hover .arrow { transform: translateX(4px); }
+
+    /* Bottom stats row */
+    .hero-bottom { position: relative; z-index: 10; max-width: 1280px; margin: 0 auto; width: 100%; padding: 0 24px 40px; display: flex; justify-content: center; gap: 48px; }
+    .hero-stat { text-align: center; }
+    .hero-stat-value { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+    .hero-stat-value .accent { color: #64CEFB; }
+    .hero-stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-top: 4px; }
+
+    /* ── Features Section ── */
+    .features-section { position: relative; background: #030612; padding: 100px 24px; }
+    .features-section .container { max-width: 1280px; margin: 0 auto; }
+    .features-header { text-align: center; margin-bottom: 64px; }
+    .features-header h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: #f1f5f9; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .features-header p { color: rgba(255,255,255,0.5); font-size: 1rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .feature-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 32px; transition: all 0.3s; position: relative; overflow: hidden; }
+    .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(100,206,251,0.3), transparent); opacity: 0; transition: opacity 0.3s; }
+    .feature-card:hover { border-color: rgba(100,206,251,0.15); transform: translateY(-4px); background: rgba(255,255,255,0.05); }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .feature-icon .material-symbols-outlined { font-size: 24px; font-variation-settings: 'FILL' 1, 'wght' 400; }
+    .icon-blue { background: rgba(59,110,247,0.12); color: #5b8aff; }
+    .icon-green { background: rgba(16,185,129,0.12); color: #34d399; }
+    .icon-purple { background: rgba(139,92,246,0.12); color: #c180ff; }
+    .icon-amber { background: rgba(245,158,11,0.12); color: #fbbf24; }
+    .icon-rose { background: rgba(244,63,94,0.12); color: #fb7185; }
+    .icon-teal { background: rgba(20,184,166,0.12); color: #2dd4bf; }
+    .feature-card h3 { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+    /* ── Privacy Section ── */
+    .privacy-section { background: #030612; padding: 0 24px 100px; }
+    .privacy-section .container { max-width: 1280px; margin: 0 auto; }
+    .privacy-banner { background: rgba(16,185,129,0.04); border: 1px solid rgba(16,185,129,0.12); border-radius: 24px; padding: 48px; text-align: center; position: relative; overflow: hidden; }
+    .privacy-banner::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 200px; height: 1px; background: linear-gradient(90deg, transparent, rgba(52,211,153,0.5), transparent); }
+    .privacy-banner h2 { font-size: 1.5rem; font-weight: 700; color: #34d399; margin-bottom: 12px; }
+    .privacy-banner p { color: rgba(255,255,255,0.5); max-width: 520px; margin: 0 auto; font-size: 0.95rem; }
+
+    /* ── Footer ── */
+    footer { background: #000; border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 24px; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
+    footer a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+    footer a:hover { color: #64CEFB; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .nav-pill { display: none; }
+      .nav-hamburger { display: block; }
+      .hero-topbar { flex-direction: column; gap: 16px; }
+      .hero-topbar .stat { text-align: left; }
+    }
     @media (max-width: 640px) {
-      .hero { padding: 60px 0 50px; }
-      .nav-links { display: none; }
+      .hero-heading { font-size: clamp(2.5rem, 12vw, 4rem); }
+      .hero-bottom { gap: 24px; flex-wrap: wrap; }
+      .hero-cta { padding: 14px 24px; font-size: 0.9rem; }
+      .features-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="bg-glow"></div>
 
-  <div class="container">
-    <nav>
-      <div class="nav-logo">Zenith Finance 360</div>
-      <div class="nav-links">
+  <!-- ════════ HERO ════════ -->
+  <section class="hero-section">
+    <!-- Background layers -->
+    <div class="hero-bg"></div>
+    <div class="hero-mesh"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Nav -->
+    <nav class="hero-nav">
+      <div class="nav-brand">
+        <div class="nav-logo-icon"></div>
+        <span class="nav-brand-text">Zenith Finance 360</span>
+      </div>
+      <div class="nav-pill">
         <a href="#features">Funciones</a>
         <a href="#privacy">Privacidad</a>
-        <a href="privacy.html">Política de Privacidad</a>
+        <a href="privacy.html">Legal</a>
+        <a href="#" class="nav-cta">App Store <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
       </div>
+      <button class="nav-hamburger" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="badge">100% LOCAL &bull; SIN NUBE &bull; SIN RASTREO</div>
-      <h1>Control total de<br><span>tus finanzas personales</span></h1>
-      <p>Dashboard inteligente, semáforo de gastos, coach financiero y metas. Todo en tu dispositivo, con total privacidad.</p>
-      <div class="cta-group">
-        <a href="#" class="btn btn-primary">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          Descargar en App Store
-        </a>
-        <a href="#features" class="btn btn-secondary">Ver funciones</a>
+    <!-- Top bar -->
+    <div class="hero-topbar">
+      <p>Herramientas financieras profesionales con privacidad total. Sin servidores, sin nube, sin rastreo de datos.</p>
+      <div class="stat">
+        <strong>100% Offline</strong>
+        Tus datos nunca salen de tu dispositivo
       </div>
-    </section>
+    </div>
 
-    <!-- Features -->
-    <section class="features" id="features">
+    <!-- Center content -->
+    <div class="hero-center">
+      <div class="hero-pretitle">
+        <span class="dot"></span>
+        Disponible pronto en App Store
+      </div>
+      <h1 class="hero-heading">
+        <span class="line1">Control total de</span>
+        <span class="line2 shiny-text">Tus Finanzas.</span>
+      </h1>
+      <p class="hero-subtitle">Dashboard inteligente, semáforo de gastos, coach financiero y metas. Todo en tu iPhone.</p>
+      <a href="#" class="hero-cta">
+        Descargar en App Store
+        <span class="arrow">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <!-- Bottom stats -->
+    <div class="hero-bottom">
+      <div class="hero-stat">
+        <div class="hero-stat-value"><span class="accent">6</span> Módulos</div>
+        <div class="hero-stat-label">Financieros integrados</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value"><span class="accent">2</span> Idiomas</div>
+        <div class="hero-stat-label">Español e Inglés</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value"><span class="accent">0</span> Datos</div>
+        <div class="hero-stat-label">Enviados a la nube</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value"><span class="accent">&infin;</span> Privacidad</div>
+        <div class="hero-stat-label">Todo en tu dispositivo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FEATURES ════════ -->
+  <section class="features-section" id="features">
+    <div class="container">
       <div class="features-header">
         <h2>Todo lo que necesitas en un solo lugar</h2>
         <p>Herramientas financieras profesionales con la simplicidad que mereces.</p>
       </div>
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon icon-blue">&#x1F4CA;</div>
+          <div class="feature-icon icon-blue"><span class="material-symbols-outlined">dashboard</span></div>
           <h3>Dashboard Inteligente</h3>
           <p>Visualiza tu dinero disponible, deudas, gasto mensual y patrimonio neto en un solo vistazo.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon icon-amber">&#x1F6A6;</div>
+          <div class="feature-icon icon-amber"><span class="material-symbols-outlined">traffic</span></div>
           <h3>Semáforo de Gastos</h3>
           <p>Sistema visual de colores que te indica al instante qué categorías están dentro, cerca o fuera de tu presupuesto.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon icon-purple">&#x1F9E0;</div>
+          <div class="feature-icon icon-purple"><span class="material-symbols-outlined">psychology</span></div>
           <h3>Coach Financiero</h3>
           <p>Alertas inteligentes sobre uso de tarjetas, fondo de emergencia, gastos fijos y comportamiento de variables.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon icon-green">&#x1F3AF;</div>
+          <div class="feature-icon icon-green"><span class="material-symbols-outlined">flag</span></div>
           <h3>Metas Financieras</h3>
           <p>Crea metas con montos y fechas. Vincula cuentas reales y visualiza tu progreso automáticamente.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon icon-rose">&#x1F4B3;</div>
+          <div class="feature-icon icon-rose"><span class="material-symbols-outlined">credit_card</span></div>
           <h3>Cuentas y Tarjetas</h3>
           <p>Administra bancos, tarjetas de crédito, inversiones, préstamos y cuentas de terceros en un solo lugar.</p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon icon-teal">&#x1F4E5;</div>
+          <div class="feature-icon icon-teal"><span class="material-symbols-outlined">document_scanner</span></div>
           <h3>Importador Inteligente</h3>
           <p>Pega texto de SMS o correos bancarios y detecta transacciones automáticamente. Procesa PDFs de estados de cuenta.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Privacy -->
-    <section id="privacy">
+  <!-- ════════ PRIVACY ════════ -->
+  <section class="privacy-section" id="privacy">
+    <div class="container">
       <div class="privacy-banner">
         <h2>Privacidad como prioridad</h2>
         <p>Todos tus datos se almacenan exclusivamente en tu dispositivo. Sin servidores, sin cuentas, sin rastreo. Tu información financiera es solo tuya.</p>
       </div>
-    </section>
-  </div>
-
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Zenith Finance 360. Todos los derechos reservados.</p>
-      <a href="privacy.html">Política de Privacidad</a>
     </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer>
+    <p>&copy; 2026 Zenith Finance 360. Todos los derechos reservados.</p>
+    <a href="privacy.html">Política de Privacidad</a>
   </footer>
+
 </body>
 </html>
