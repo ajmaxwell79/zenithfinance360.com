@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenith Finance 360 — Control total de tus finanzas</title>
+  <meta name="description" content="App de finanzas personales con privacidad total. Dashboard inteligente, semáforo de gastos, coach financiero y metas. Todos tus datos se quedan en tu dispositivo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background: #030612; color: #e2e4f9; line-height: 1.6; overflow-x: hidden; }
+
+    /* Background */
+    .bg-glow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse 900px 500px at 15% 10%, rgba(37,99,235,0.15), transparent 60%),
+                  radial-gradient(ellipse 700px 400px at 85% 5%, rgba(139,92,246,0.12), transparent 60%),
+                  radial-gradient(ellipse 600px 400px at 20% 90%, rgba(16,185,129,0.08), transparent 55%); }
+
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    /* Nav */
+    nav { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-size: 1.2rem; font-weight: 700; color: #90abff; }
+    .nav-links a { color: #a7aabe; font-size: 0.85rem; text-decoration: none; margin-left: 24px; transition: color 0.2s; }
+    .nav-links a:hover { color: #90abff; }
+
+    /* Hero */
+    .hero { text-align: center; padding: 60px 0 40px; }
+    .badge { display: inline-block; background: rgba(144,171,255,0.1); border: 1px solid rgba(144,171,255,0.2); border-radius: 99px; padding: 6px 16px; font-size: 0.75rem; font-weight: 600; color: #90abff; margin-bottom: 24px; letter-spacing: 0.5px; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; color: #f1f5f9; line-height: 1.15; margin-bottom: 20px; }
+    .hero h1 span { background: linear-gradient(135deg, #5b8aff, #c180ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 1.1rem; color: #a7aabe; max-width: 560px; margin: 0 auto 40px; }
+    .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 14px; font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: all 0.2s; border: none; cursor: pointer; }
+    .btn-primary { background: linear-gradient(140deg, #3b6ef7, #1a3bc2); color: #fff; box-shadow: 0 4px 20px rgba(27,59,194,0.4); }
+    .btn-primary:hover { box-shadow: 0 8px 30px rgba(27,59,194,0.55); transform: translateY(-2px); }
+    .btn-secondary { background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); color: #f1f5f9; }
+
+    /* Features */
+    .features { padding: 80px 0; }
+    .features-header { text-align: center; margin-bottom: 60px; }
+    .features-header h2 { font-size: 1.8rem; font-weight: 700; color: #f1f5f9; margin-bottom: 12px; }
+    .features-header p { color: #a7aabe; font-size: 1rem; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .feature-card { background: rgba(16,20,38,0.65); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 28px; transition: border-color 0.2s, transform 0.2s; }
+    .feature-card:hover { border-color: rgba(144,171,255,0.2); transform: translateY(-4px); }
+    .feature-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px; }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; color: #f1f5f9; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.85rem; color: #a7aabe; line-height: 1.5; }
+
+    .icon-blue { background: rgba(59,110,247,0.15); color: #5b8aff; }
+    .icon-green { background: rgba(16,185,129,0.15); color: #34d399; }
+    .icon-purple { background: rgba(139,92,246,0.15); color: #c180ff; }
+    .icon-amber { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    .icon-rose { background: rgba(244,63,94,0.15); color: #fb7185; }
+    .icon-teal { background: rgba(20,184,166,0.15); color: #2dd4bf; }
+
+    /* Privacy banner */
+    .privacy-banner { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.15); border-radius: 20px; padding: 40px; text-align: center; margin: 40px 0 80px; }
+    .privacy-banner h2 { font-size: 1.5rem; color: #34d399; margin-bottom: 12px; }
+    .privacy-banner p { color: #a7aabe; max-width: 520px; margin: 0 auto; font-size: 0.95rem; }
+
+    /* Footer */
+    footer { border-top: 1px solid rgba(255,255,255,0.07); padding: 32px 0; text-align: center; }
+    footer p { font-size: 0.8rem; color: #717487; margin-bottom: 8px; }
+    footer a { color: #717487; text-decoration: none; font-size: 0.8rem; }
+    footer a:hover { color: #90abff; }
+
+    @media (max-width: 640px) {
+      .hero { padding: 60px 0 50px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <div class="container">
+    <nav>
+      <div class="nav-logo">Zenith Finance 360</div>
+      <div class="nav-links">
+        <a href="#features">Funciones</a>
+        <a href="#privacy">Privacidad</a>
+        <a href="privacy.html">Política de Privacidad</a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="badge">100% LOCAL &bull; SIN NUBE &bull; SIN RASTREO</div>
+      <h1>Control total de<br><span>tus finanzas personales</span></h1>
+      <p>Dashboard inteligente, semáforo de gastos, coach financiero y metas. Todo en tu dispositivo, con total privacidad.</p>
+      <div class="cta-group">
+        <a href="#" class="btn btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Descargar en App Store
+        </a>
+        <a href="#features" class="btn btn-secondary">Ver funciones</a>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+      <div class="features-header">
+        <h2>Todo lo que necesitas en un solo lugar</h2>
+        <p>Herramientas financieras profesionales con la simplicidad que mereces.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon icon-blue">&#x1F4CA;</div>
+          <h3>Dashboard Inteligente</h3>
+          <p>Visualiza tu dinero disponible, deudas, gasto mensual y patrimonio neto en un solo vistazo.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-amber">&#x1F6A6;</div>
+          <h3>Semáforo de Gastos</h3>
+          <p>Sistema visual de colores que te indica al instante qué categorías están dentro, cerca o fuera de tu presupuesto.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-purple">&#x1F9E0;</div>
+          <h3>Coach Financiero</h3>
+          <p>Alertas inteligentes sobre uso de tarjetas, fondo de emergencia, gastos fijos y comportamiento de variables.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-green">&#x1F3AF;</div>
+          <h3>Metas Financieras</h3>
+          <p>Crea metas con montos y fechas. Vincula cuentas reales y visualiza tu progreso automáticamente.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-rose">&#x1F4B3;</div>
+          <h3>Cuentas y Tarjetas</h3>
+          <p>Administra bancos, tarjetas de crédito, inversiones, préstamos y cuentas de terceros en un solo lugar.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon icon-teal">&#x1F4E5;</div>
+          <h3>Importador Inteligente</h3>
+          <p>Pega texto de SMS o correos bancarios y detecta transacciones automáticamente. Procesa PDFs de estados de cuenta.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section id="privacy">
+      <div class="privacy-banner">
+        <h2>Privacidad como prioridad</h2>
+        <p>Todos tus datos se almacenan exclusivamente en tu dispositivo. Sin servidores, sin cuentas, sin rastreo. Tu información financiera es solo tuya.</p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Zenith Finance 360. Todos los derechos reservados.</p>
+      <a href="privacy.html">Política de Privacidad</a>
+    </div>
+  </footer>
+</body>
+</html>
