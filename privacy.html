@@ -6,79 +6,421 @@
   <title>Política de Privacidad — Zenith Finance 360</title>
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #030612; color: #e2e4f9; line-height: 1.7; }
-    .container { max-width: 720px; margin: 0 auto; padding: 60px 24px; }
-    .logo { font-size: 1.5rem; font-weight: 700; color: #90abff; margin-bottom: 8px; }
-    h1 { font-size: 2rem; font-weight: 700; color: #f1f5f9; margin-bottom: 8px; }
-    .updated { font-size: 0.85rem; color: #717487; margin-bottom: 48px; }
-    h2 { font-size: 1.15rem; font-weight: 600; color: #90abff; margin-top: 36px; margin-bottom: 12px; }
-    p, li { font-size: 0.95rem; color: #a7aabe; margin-bottom: 12px; }
-    ul { padding-left: 20px; }
-    li { margin-bottom: 8px; }
-    .highlight { background: rgba(144,171,255,0.08); border: 1px solid rgba(144,171,255,0.15); border-radius: 12px; padding: 20px; margin: 24px 0; }
-    .highlight p { color: #c8d0e8; margin-bottom: 0; }
-    a { color: #90abff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.07); font-size: 0.8rem; color: #717487; }
-    .back-link { display: inline-block; margin-bottom: 32px; font-size: 0.85rem; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#030612;color:#e2e4f9;line-height:1.8}
+    .container{max-width:760px;margin:0 auto;padding:60px 24px 80px}
+
+    /* Nav mini */
+    .top-bar{position:fixed;top:0;left:0;right:0;z-index:50;padding:14px 24px;background:rgba(3,6,18,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
+    .top-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .top-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .top-brand img{width:30px;height:30px;border-radius:8px}
+    .top-brand span{font-size:0.9rem;font-weight:700;color:#fff}
+    .back-link{font-size:0.8rem;color:rgba(255,255,255,0.4);text-decoration:none;transition:color .2s}
+    .back-link:hover{color:#64CEFB}
+
+    /* Content */
+    .spacer{height:80px}
+    h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:#f1f5f9;letter-spacing:-0.03em;margin-bottom:8px}
+    .updated{font-size:0.8rem;color:rgba(255,255,255,0.3);margin-bottom:40px;display:block}
+    .effective{font-size:0.8rem;color:rgba(255,255,255,0.3);margin-bottom:48px;display:block}
+
+    /* Highlight box */
+    .highlight{background:rgba(52,211,153,0.04);border:1px solid rgba(52,211,153,0.12);border-radius:16px;padding:24px 28px;margin:0 0 48px}
+    .highlight p{color:#c8d0e8;margin:0;font-size:0.92rem;line-height:1.7}
+    .highlight strong{color:#34d399}
+
+    /* Sections */
+    h2{font-size:1.1rem;font-weight:700;color:#64CEFB;margin-top:40px;margin-bottom:14px;letter-spacing:-0.01em}
+    h3{font-size:0.95rem;font-weight:600;color:#f1f5f9;margin-top:20px;margin-bottom:8px}
+    p,li{font-size:0.9rem;color:rgba(255,255,255,0.55);margin-bottom:12px;line-height:1.8}
+    ul{padding-left:20px;margin-bottom:16px}
+    li{margin-bottom:8px}
+    li strong{color:rgba(255,255,255,0.7)}
+
+    /* Table */
+    .data-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:0.85rem}
+    .data-table th{text-align:left;padding:10px 14px;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.6);font-weight:600;border-bottom:1px solid rgba(255,255,255,0.08);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em}
+    .data-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);color:rgba(255,255,255,0.5)}
+    .data-table tr:hover td{background:rgba(255,255,255,0.02)}
+    .badge-local{display:inline-block;background:rgba(52,211,153,0.1);color:#34d399;font-size:0.7rem;font-weight:600;padding:2px 8px;border-radius:6px}
+    .badge-none{display:inline-block;background:rgba(244,63,94,0.08);color:#fb7185;font-size:0.7rem;font-weight:600;padding:2px 8px;border-radius:6px}
+    .badge-min{display:inline-block;background:rgba(251,191,36,0.08);color:#fbbf24;font-size:0.7rem;font-weight:600;padding:2px 8px;border-radius:6px}
+
+    /* Accordion */
+    details{margin-bottom:12px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden}
+    summary{padding:14px 18px;font-size:0.9rem;font-weight:600;color:#f1f5f9;cursor:pointer;background:rgba(255,255,255,0.02);transition:background .2s;list-style:none}
+    summary::-webkit-details-marker{display:none}
+    summary::before{content:'▸';margin-right:10px;color:#64CEFB;display:inline-block;transition:transform .2s}
+    details[open] summary::before{transform:rotate(90deg)}
+    summary:hover{background:rgba(255,255,255,0.04)}
+    details .detail-content{padding:16px 18px;border-top:1px solid rgba(255,255,255,0.04)}
+    details .detail-content p{margin-bottom:8px}
+    details .detail-content p:last-child{margin-bottom:0}
+
+    /* Rights icons */
+    .rights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0 28px}
+    .right-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:18px;text-align:center}
+    .right-card .icon{font-size:1.6rem;margin-bottom:8px}
+    .right-card h4{font-size:0.85rem;font-weight:700;color:#f1f5f9;margin-bottom:4px}
+    .right-card p{font-size:0.78rem;color:rgba(255,255,255,0.4);margin:0}
+
+    /* Divider */
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(100,206,251,0.15),transparent);margin:48px 0}
+
+    /* Footer */
+    .footer{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);text-align:center}
+    .footer p{font-size:0.75rem;color:rgba(255,255,255,0.2);margin-bottom:6px}
+    .footer a{color:rgba(255,255,255,0.3);text-decoration:none;font-size:0.75rem;transition:color .2s}
+    .footer a:hover{color:#64CEFB}
+
+    a{color:#64CEFB;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    @media(max-width:640px){
+      .container{padding:60px 18px 60px}
+      .rights-grid{grid-template-columns:1fr}
+      .data-table{font-size:0.78rem}
+      .data-table th,.data-table td{padding:8px 10px}
+    }
   </style>
 </head>
 <body>
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="top-inner">
+      <a href="/" class="top-brand"><img src="logo.png" alt=""><span>Zenith Finance 360</span></a>
+      <a href="/" class="back-link">&larr; Volver al inicio</a>
+    </div>
+  </div>
+
   <div class="container">
-    <a href="/" class="back-link">&larr; Volver al inicio</a>
-    <div class="logo" style="display:flex;align-items:center;gap:10px;"><img src="logo.png" alt="" width="32" height="32" style="border-radius:8px;">Zenith Finance 360</div>
+    <div class="spacer"></div>
+
     <h1>Política de Privacidad</h1>
-    <p class="updated">Última actualización: 5 de abril de 2026</p>
+    <span class="updated">Última actualización: 5 de abril de 2026</span>
+    <span class="effective">Fecha de vigencia: 5 de abril de 2026</span>
 
     <div class="highlight">
-      <p><strong>Resumen:</strong> Zenith Finance 360 no recopila, transmite ni almacena ningún dato personal en servidores externos. Toda tu información financiera permanece exclusivamente en tu dispositivo.</p>
+      <p><strong>Compromiso de privacidad:</strong> Zenith Finance 360 fue diseñada con un principio fundamental: tu información financiera es exclusivamente tuya. No recopilamos, transmitimos, almacenamos ni procesamos ningún dato personal en servidores externos. Toda tu información permanece en tu dispositivo bajo tu control absoluto.</p>
     </div>
 
-    <h2>1. Información que recopilamos</h2>
-    <p><strong>No recopilamos ninguna información personal.</strong></p>
-    <p>Zenith Finance 360 es una aplicación que funciona completamente de forma local en tu dispositivo. No cuenta con servidores, bases de datos externas ni servicios en la nube. La información financiera que registras (cuentas, transacciones, presupuestos, metas) se almacena únicamente en el almacenamiento local de tu dispositivo.</p>
+    <!-- ── 1. ALCANCE ── -->
+    <h2>1. Alcance y aplicación</h2>
+    <p>Esta política de privacidad se aplica a la aplicación móvil Zenith Finance 360 para iOS (en adelante, "la Aplicación"), desarrollada y distribuida por Zenith Finance 360 (en adelante, "nosotros" o "el Desarrollador").</p>
+    <p>Al descargar, instalar o utilizar la Aplicación, aceptas las prácticas descritas en esta política. Si no estás de acuerdo con algún término, te recomendamos no utilizar la Aplicación.</p>
 
-    <h2>2. Datos almacenados localmente</h2>
-    <p>La aplicación almacena los siguientes datos exclusivamente en tu dispositivo:</p>
+    <!-- ── 2. ARQUITECTURA ── -->
+    <h2>2. Arquitectura de datos: 100% local</h2>
+    <p>La Aplicación opera bajo una arquitectura <strong>completamente offline y local</strong>. Esto significa que:</p>
     <ul>
-      <li>Cuentas bancarias, tarjetas de crédito e inversiones que registres</li>
-      <li>Transacciones de ingresos y gastos</li>
-      <li>Presupuestos y categorías personalizadas</li>
-      <li>Metas financieras</li>
-      <li>Preferencias de configuración (idioma, moneda, país)</li>
-    </ul>
-    <p>Estos datos nunca salen de tu dispositivo a menos que tú decidas exportarlos manualmente mediante la función de respaldo.</p>
-
-    <h2>3. Compartir datos con terceros</h2>
-    <p><strong>No compartimos datos con terceros.</strong> Dado que no recopilamos información, no existe información que compartir, vender ni transferir a ninguna entidad externa.</p>
-
-    <h2>4. Servicios externos</h2>
-    <p>Zenith Finance 360 utiliza únicamente el siguiente recurso externo:</p>
-    <ul>
-      <li><strong>Google Fonts (Material Symbols):</strong> Se carga una fuente de iconos desde los servidores de Google para mostrar los iconos de la interfaz. Google puede registrar la solicitud de descarga de la fuente según su propia política de privacidad. No se envía ningún dato personal ni financiero en esta solicitud.</li>
+      <li><strong>No existen servidores backend</strong> — la Aplicación no se conecta a ningún servidor propio para enviar o recibir datos.</li>
+      <li><strong>No existe base de datos en la nube</strong> — no hay Firebase, AWS, Azure ni ningún servicio de almacenamiento remoto.</li>
+      <li><strong>No existe sistema de cuentas de usuario</strong> — no se requiere registro, inicio de sesión ni autenticación contra servidores externos.</li>
+      <li><strong>No existe telemetría ni analytics</strong> — no usamos Google Analytics, Mixpanel, Amplitude ni ningún servicio de rastreo.</li>
     </ul>
 
-    <h2>5. Seguridad</h2>
-    <p>Tu información se almacena en el sandbox seguro de la aplicación en tu dispositivo iOS, protegido por las medidas de seguridad del sistema operativo (cifrado del dispositivo, código de acceso, Face ID/Touch ID).</p>
-    <p>Recomendamos mantener tu dispositivo protegido con un código de acceso y utilizar la función de respaldo periódicamente para evitar la pérdida de datos.</p>
+    <!-- ── 3. DATOS ALMACENADOS ── -->
+    <h2>3. Datos almacenados en tu dispositivo</h2>
+    <p>La siguiente tabla detalla los tipos de datos que la Aplicación almacena, todos exclusivamente en el almacenamiento local de tu dispositivo iOS:</p>
 
-    <h2>6. Respaldos y exportación</h2>
-    <p>La aplicación te permite exportar tus datos en formato JSON. Este archivo de respaldo se genera y descarga localmente. Tú eres el único responsable de su almacenamiento y protección.</p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Tipo de dato</th>
+          <th>Ejemplos</th>
+          <th>Almacenamiento</th>
+          <th>Transmisión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cuentas financieras</td>
+          <td>Nombres de bancos, saldos, tipos de cuenta</td>
+          <td><span class="badge-local">Local</span></td>
+          <td><span class="badge-none">Ninguna</span></td>
+        </tr>
+        <tr>
+          <td>Transacciones</td>
+          <td>Montos, fechas, categorías, descripciones</td>
+          <td><span class="badge-local">Local</span></td>
+          <td><span class="badge-none">Ninguna</span></td>
+        </tr>
+        <tr>
+          <td>Presupuestos</td>
+          <td>Categorías, límites mensuales, progreso</td>
+          <td><span class="badge-local">Local</span></td>
+          <td><span class="badge-none">Ninguna</span></td>
+        </tr>
+        <tr>
+          <td>Metas financieras</td>
+          <td>Nombres, montos objetivo, fechas, progreso</td>
+          <td><span class="badge-local">Local</span></td>
+          <td><span class="badge-none">Ninguna</span></td>
+        </tr>
+        <tr>
+          <td>Preferencias</td>
+          <td>Idioma, moneda, país, configuración visual</td>
+          <td><span class="badge-local">Local</span></td>
+          <td><span class="badge-none">Ninguna</span></td>
+        </tr>
+        <tr>
+          <td>Datos importados</td>
+          <td>Textos SMS/correo procesados, PDFs de estados de cuenta</td>
+          <td><span class="badge-local">Local</span></td>
+          <td><span class="badge-none">Ninguna</span></td>
+        </tr>
+      </tbody>
+    </table>
 
-    <h2>7. Datos de menores</h2>
-    <p>No recopilamos información de ningún usuario, incluyendo menores de edad. La aplicación no requiere creación de cuenta ni registro.</p>
+    <p>Los datos se almacenan utilizando el mecanismo de almacenamiento local (localStorage) dentro del sandbox seguro de la aplicación iOS, protegido por las medidas de seguridad del sistema operativo.</p>
 
-    <h2>8. Cambios a esta política</h2>
-    <p>Si realizamos cambios a esta política de privacidad, actualizaremos esta página con la nueva fecha de vigencia. Dado que no recopilamos datos de contacto, te recomendamos revisar esta página periódicamente.</p>
+    <!-- ── 4. DATOS QUE NO RECOPILAMOS ── -->
+    <h2>4. Datos que NO recopilamos</h2>
+    <p>Para mayor claridad y transparencia, confirmamos que <strong>no recopilamos ni tenemos acceso a</strong>:</p>
+    <ul>
+      <li>Nombre, dirección, correo electrónico ni número de teléfono</li>
+      <li>Identificadores de dispositivo (IDFA, IDFV, UUID)</li>
+      <li>Ubicación geográfica (GPS, IP, Wi-Fi)</li>
+      <li>Contactos, fotos, calendario ni ningún dato de otras aplicaciones</li>
+      <li>Credenciales bancarias, números de cuenta ni datos de tarjetas reales</li>
+      <li>Historial de navegación ni actividad en otras aplicaciones</li>
+      <li>Datos biométricos (Face ID / Touch ID los gestiona iOS directamente)</li>
+      <li>Datos de uso, frecuencia de apertura ni patrones de comportamiento</li>
+      <li>Datos de diagnóstico, registros de errores ni crash reports</li>
+    </ul>
 
-    <h2>9. Contacto</h2>
-    <p>Si tienes preguntas sobre esta política de privacidad, puedes contactarnos en:</p>
+    <!-- ── 5. SERVICIOS EXTERNOS ── -->
+    <h2>5. Conexiones de red y servicios externos</h2>
+    <p>La Aplicación realiza las siguientes conexiones de red mínimas e indispensables para su funcionamiento visual:</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Servicio</th>
+          <th>Propósito</th>
+          <th>Datos enviados</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Google Fonts (fonts.googleapis.com)</td>
+          <td>Carga de fuente de iconos Material Symbols para la interfaz</td>
+          <td><span class="badge-min">Mínimo</span> — solo la solicitud HTTP estándar (IP, user-agent del navegador)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Nota importante:</strong> En la solicitud a Google Fonts, no se envía ningún dato personal, financiero ni identificador único de la Aplicación. Google puede procesar la dirección IP según su propia <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidad</a>. No tenemos control sobre el procesamiento de datos por parte de Google en esta solicitud mínima.</p>
+
+    <!-- ── 6. COMPARTIR DATOS ── -->
+    <h2>6. Compartir datos con terceros</h2>
+    <p><strong>No compartimos, vendemos, alquilamos, intercambiamos ni transferimos ningún dato a terceros</strong>, ya que no recopilamos ningún dato. Esto incluye:</p>
+    <ul>
+      <li>No vendemos datos a intermediarios de datos (data brokers)</li>
+      <li>No compartimos datos con redes publicitarias</li>
+      <li>No proporcionamos datos a redes sociales</li>
+      <li>No transferimos datos a empresas matrices, subsidiarias ni socios comerciales</li>
+      <li>No entregamos datos a gobiernos ni autoridades (no hay datos que entregar)</li>
+    </ul>
+
+    <!-- ── 7. SEGURIDAD ── -->
+    <h2>7. Medidas de seguridad</h2>
+    <p>Aunque no almacenamos datos en servidores, nos tomamos en serio la protección de tu información local:</p>
+
+    <h3>7.1 Protección a nivel de sistema operativo</h3>
+    <ul>
+      <li><strong>Sandbox de iOS:</strong> La Aplicación opera en un entorno aislado. Otras aplicaciones no pueden acceder a los datos de Zenith Finance 360.</li>
+      <li><strong>Cifrado del dispositivo:</strong> iOS cifra automáticamente todos los datos almacenados cuando tu dispositivo tiene un código de acceso activado.</li>
+      <li><strong>Autenticación biométrica:</strong> La Aplicación soporta Face ID / Touch ID como capa adicional de protección al abrir la app.</li>
+    </ul>
+
+    <h3>7.2 Protección a nivel de aplicación</h3>
+    <ul>
+      <li><strong>Pantalla de privacidad:</strong> Cuando la Aplicación pasa a segundo plano, el contenido financiero se oculta automáticamente para evitar que aparezca en el selector de apps.</li>
+      <li><strong>Sin caché externa:</strong> Los datos no se almacenan en cachés compartidos ni temporales accesibles por otras apps.</li>
+      <li><strong>Sin logs remotos:</strong> No se envían registros de actividad ni errores a servidores externos.</li>
+    </ul>
+
+    <h3>7.3 Recomendaciones de seguridad</h3>
+    <ul>
+      <li>Mantén tu dispositivo protegido con un código de acceso alfanumérico fuerte</li>
+      <li>Activa Face ID o Touch ID para protección biométrica</li>
+      <li>Mantén iOS actualizado para recibir parches de seguridad</li>
+      <li>Realiza respaldos periódicos usando la función de exportación de la app</li>
+      <li>Almacena tus archivos de respaldo en un lugar seguro y cifrado</li>
+    </ul>
+
+    <!-- ── 8. RESPALDOS ── -->
+    <h2>8. Respaldos y exportación de datos</h2>
+    <p>La Aplicación te permite exportar todos tus datos en formato JSON. Es importante que entiendas:</p>
+    <ul>
+      <li>El archivo de respaldo se genera y almacena <strong>localmente en tu dispositivo</strong></li>
+      <li>El respaldo contiene <strong>todos tus datos financieros en texto plano</strong> — trátalo como información confidencial</li>
+      <li>Tú eres el <strong>único responsable</strong> de la custodia, almacenamiento y protección de tus archivos de respaldo</li>
+      <li>Recomendamos almacenar respaldos en ubicaciones cifradas (ej. iCloud Drive con Protección de Datos Avanzada)</li>
+      <li>Si compartes un respaldo, la persona receptora tendrá acceso a toda tu información financiera</li>
+    </ul>
+
+    <!-- ── 9. DERECHOS ── -->
+    <h2>9. Tus derechos sobre tus datos</h2>
+    <p>Dado que todos tus datos están en tu dispositivo, tienes control total y absoluto:</p>
+
+    <div class="rights-grid">
+      <div class="right-card">
+        <div class="icon">👁️</div>
+        <h4>Acceso</h4>
+        <p>Visualiza todos tus datos directamente en la app en cualquier momento</p>
+      </div>
+      <div class="right-card">
+        <div class="icon">✏️</div>
+        <h4>Modificación</h4>
+        <p>Edita cualquier cuenta, transacción, presupuesto o meta cuando lo desees</p>
+      </div>
+      <div class="right-card">
+        <div class="icon">📦</div>
+        <h4>Portabilidad</h4>
+        <p>Exporta todos tus datos en formato JSON estándar y legible</p>
+      </div>
+      <div class="right-card">
+        <div class="icon">🗑️</div>
+        <h4>Eliminación</h4>
+        <p>Elimina datos individuales o desinstala la app para borrar todo permanentemente</p>
+      </div>
+    </div>
+
+    <p>No necesitas contactarnos para ejercer ninguno de estos derechos, ya que tus datos nunca salen de tu dispositivo.</p>
+
+    <!-- ── 10. RETENCIÓN ── -->
+    <h2>10. Retención y eliminación de datos</h2>
+    <ul>
+      <li><strong>Retención:</strong> Tus datos permanecen en tu dispositivo mientras la Aplicación esté instalada y no los elimines manualmente.</li>
+      <li><strong>Eliminación parcial:</strong> Puedes eliminar cuentas, transacciones o cualquier dato individual directamente desde la Aplicación.</li>
+      <li><strong>Eliminación total:</strong> Desinstalar la Aplicación elimina permanente e irrecuperablemente todos los datos almacenados.</li>
+      <li><strong>Sin respaldo remoto:</strong> No mantenemos copias de tus datos. Si desinstales sin exportar, los datos se pierden definitivamente.</li>
+    </ul>
+
+    <!-- ── 11. MENORES ── -->
+    <h2>11. Menores de edad</h2>
+    <p>La Aplicación no está dirigida a menores de 13 años. No obstante, dado que no recopilamos ningún dato personal de ningún usuario, no existe riesgo de recopilación de información de menores.</p>
+    <p>Si un menor utiliza la Aplicación, toda la información que registre permanecerá exclusivamente en el dispositivo, bajo las mismas protecciones de privacidad que cualquier otro usuario.</p>
+
+    <!-- ── 12. TRANSFERENCIAS INTERNACIONALES ── -->
+    <h2>12. Transferencias internacionales de datos</h2>
+    <p><strong>No realizamos transferencias internacionales de datos.</strong> Dado que no recopilamos ni almacenamos datos en servidores, no hay datos que transferir entre jurisdicciones. Tus datos residen exclusivamente en tu dispositivo físico, en la jurisdicción donde te encuentres.</p>
+
+    <!-- ── 13. CUMPLIMIENTO ── -->
+    <h2>13. Cumplimiento normativo</h2>
+    <p>Aunque nuestra arquitectura local minimiza las obligaciones regulatorias al no procesar datos en servidores, nuestras prácticas son compatibles con:</p>
+    <ul>
+      <li><strong>RGPD</strong> (Reglamento General de Protección de Datos — UE): Minimización de datos, privacidad por diseño y por defecto</li>
+      <li><strong>CCPA/CPRA</strong> (California Consumer Privacy Act): No venta de información personal</li>
+      <li><strong>LGPD</strong> (Lei Geral de Proteção de Dados — Brasil): Transparencia y finalidad legítima</li>
+      <li><strong>LFPDPPP</strong> (Ley Federal de Protección de Datos Personales — México): Principios de información y responsabilidad</li>
+      <li><strong>Apple App Store Guidelines</strong>: Cumplimiento de los requisitos de privacidad y App Tracking Transparency</li>
+    </ul>
+
+    <div class="divider"></div>
+
+    <!-- ── FAQ ── -->
+    <h2>Preguntas frecuentes</h2>
+
+    <details>
+      <summary>¿Qué pasa con mis datos si pierdo mi teléfono?</summary>
+      <div class="detail-content">
+        <p>Si pierdes tu dispositivo, tus datos financieros están protegidos por el cifrado de iOS y el código de acceso de tu dispositivo. Sin embargo, no podrás recuperar los datos de Zenith Finance 360 a menos que hayas realizado un respaldo previamente. Recomendamos exportar respaldos periódicamente.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>¿Los datos se sincronizan con iCloud?</summary>
+      <div class="detail-content">
+        <p>No. La Aplicación no utiliza iCloud ni ningún servicio de sincronización en la nube. Si cambias de dispositivo, necesitarás exportar tus datos manualmente e importarlos en el nuevo dispositivo.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>¿Pueden acceder a mis datos mediante una orden judicial?</summary>
+      <div class="detail-content">
+        <p>No mantenemos servidores ni bases de datos, por lo que no tenemos datos que entregar ante ninguna solicitud legal. Tus datos solo existen en tu dispositivo físico y están protegidos por la seguridad de iOS.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>¿La app funciona sin conexión a internet?</summary>
+      <div class="detail-content">
+        <p>Sí. La Aplicación funciona completamente sin conexión a internet. La única conexión de red es la carga inicial de iconos desde Google Fonts, que se almacenan en caché del navegador. Después de la primera carga, la app puede funcionar completamente offline.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>¿Qué pasa si desinstalo y reinstalo la app?</summary>
+      <div class="detail-content">
+        <p>Al desinstalar la Aplicación, todos los datos se eliminan permanentemente del dispositivo. Al reinstalar, comenzarás con una instalación limpia. Solo podrás recuperar tus datos si previamente exportaste un respaldo JSON.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>¿Utilizan cookies o tecnologías de rastreo?</summary>
+      <div class="detail-content">
+        <p>No. La Aplicación no utiliza cookies, píxeles de seguimiento, fingerprinting, web beacons ni ninguna otra tecnología de rastreo. No existe ningún mecanismo de identificación de usuarios.</p>
+      </div>
+    </details>
+
+    <!-- ── 14. PROPIEDAD INTELECTUAL ── -->
+    <h2>14. Propiedad intelectual y derechos de autor</h2>
+    <p>Todos los derechos de propiedad intelectual de Zenith Finance 360 están protegidos por las leyes de derechos de autor aplicables:</p>
+    <ul>
+      <li><strong>Software:</strong> El código fuente, la arquitectura, los algoritmos y la lógica de la Aplicación son propiedad exclusiva de Zenith Finance 360. Queda prohibida la reproducción, distribución, modificación, ingeniería inversa, descompilación o creación de obras derivadas sin autorización expresa por escrito.</li>
+      <li><strong>Diseño e interfaz:</strong> El diseño visual, la interfaz de usuario (UI), la experiencia de usuario (UX), los iconos, las animaciones y la identidad gráfica son obras protegidas por derechos de autor.</li>
+      <li><strong>Marca:</strong> El nombre "Zenith Finance 360", el logotipo, los eslóganes y cualquier marca asociada son propiedad del Desarrollador. Su uso no autorizado constituye una violación de derechos de marca.</li>
+      <li><strong>Contenido:</strong> Todos los textos, descripciones, instrucciones y materiales informativos incluidos en la Aplicación y en este sitio web están protegidos por derechos de autor.</li>
+    </ul>
+
+    <h3>Uso permitido</h3>
+    <ul>
+      <li>Puedes usar la Aplicación según los términos de la licencia otorgada a través del App Store</li>
+      <li>Puedes compartir capturas de pantalla de la Aplicación para uso personal o reseñas, siempre que se atribuya adecuadamente</li>
+      <li>Puedes enlazar a este sitio web desde medios informativos o educativos</li>
+    </ul>
+
+    <h3>Uso prohibido</h3>
+    <ul>
+      <li>Copiar, clonar o replicar la Aplicación o cualquiera de sus componentes</li>
+      <li>Utilizar la marca, logotipo o nombre de Zenith Finance 360 con fines comerciales sin autorización</li>
+      <li>Realizar ingeniería inversa, descompilar o intentar extraer el código fuente</li>
+      <li>Distribuir, sublicenciar o comercializar la Aplicación por canales no autorizados</li>
+      <li>Crear aplicaciones que imiten sustancialmente el diseño, funcionalidad o identidad visual de Zenith Finance 360</li>
+    </ul>
+
+    <p>Las infracciones a los derechos de propiedad intelectual serán perseguidas conforme a la legislación aplicable, incluyendo la Ley de Derechos de Autor (DMCA), el Convenio de Berna y las leyes nacionales correspondientes.</p>
+    <p>Para reportar infracciones de propiedad intelectual: <a href="mailto:legal@zenithfinance360.com">legal@zenithfinance360.com</a></p>
+
+    <div class="divider"></div>
+
+    <!-- ── CAMBIOS ── -->
+    <h2>15. Cambios a esta política</h2>
+    <p>Nos reservamos el derecho de actualizar esta política de privacidad. En caso de cambios:</p>
+    <ul>
+      <li>Actualizaremos la fecha de "Última actualización" en la parte superior</li>
+      <li>Los cambios significativos se comunicarán mediante una nota en la Aplicación</li>
+      <li>La versión vigente estará siempre disponible en esta página</li>
+    </ul>
+    <p>Dado que no recopilamos datos de contacto, te recomendamos revisar esta página periódicamente.</p>
+
+    <!-- ── CONTACTO ── -->
+    <h2>16. Contacto</h2>
+    <p>Si tienes preguntas, inquietudes o solicitudes relacionadas con esta política de privacidad o con la protección de tus datos, puedes contactarnos:</p>
     <p><strong>Email:</strong> <a href="mailto:privacy@zenithfinance360.com">privacy@zenithfinance360.com</a></p>
+    <p>Nos comprometemos a responder todas las consultas en un plazo máximo de 30 días hábiles.</p>
 
     <div class="footer">
       <p>&copy; 2026 Zenith Finance 360. Todos los derechos reservados.</p>
+      <a href="/">Volver al inicio</a>
     </div>
   </div>
 </body>

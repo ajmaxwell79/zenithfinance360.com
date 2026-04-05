@@ -9,255 +9,420 @@
   <link rel="apple-touch-icon" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', -apple-system, sans-serif; background: #000; color: #fff; line-height: 1.6; overflow-x: hidden; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',-apple-system,sans-serif;background:#000;color:#fff;line-height:1.6;overflow-x:hidden}
 
-    /* ── Hero Section ── */
-    .hero-section { position: relative; min-height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+    /* ── Utility ── */
+    .container{max-width:1200px;margin:0 auto;padding:0 24px}
+    .section-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(100,206,251,0.08);border:1px solid rgba(100,206,251,0.15);border-radius:99px;padding:6px 16px;font-size:0.75rem;font-weight:600;color:#64CEFB;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:20px}
+    .section-badge .material-symbols-outlined{font-size:16px}
+    .section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-0.03em;color:#f1f5f9;margin-bottom:16px;line-height:1.1}
+    .section-sub{color:rgba(255,255,255,0.45);font-size:clamp(0.9rem,1.2vw,1.05rem);max-width:560px;margin:0 auto 48px}
 
-    /* Animated gradient background */
-    .hero-bg { position: absolute; inset: 0; z-index: 0; }
-    .hero-bg::before { content: ''; position: absolute; inset: 0; background: #000; }
-    .hero-bg::after { content: ''; position: absolute; inset: 0;
+    /* ── Scroll Reveal ── */
+    .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s cubic-bezier(.16,1,.3,1),transform 0.8s cubic-bezier(.16,1,.3,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-delay-1{transition-delay:0.1s}
+    .reveal-delay-2{transition-delay:0.2s}
+    .reveal-delay-3{transition-delay:0.3s}
+    .reveal-delay-4{transition-delay:0.4s}
+
+    /* ── Hero ── */
+    .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;z-index:0}
+    .hero-bg::before{content:'';position:absolute;inset:0;background:#000}
+    .hero-bg::after{content:'';position:absolute;inset:0;
       background:
-        radial-gradient(ellipse 800px 600px at 20% 50%, rgba(59,110,247,0.18), transparent 70%),
-        radial-gradient(ellipse 600px 500px at 80% 30%, rgba(139,92,246,0.14), transparent 70%),
-        radial-gradient(ellipse 900px 400px at 50% 80%, rgba(16,185,129,0.10), transparent 70%);
-      animation: bgPulse 8s ease-in-out infinite alternate;
-    }
-    @keyframes bgPulse {
-      0% { opacity: 0.6; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.05); }
-    }
-
-    /* Particle canvas */
-    #particleCanvas { position: absolute; inset: 0; z-index: 1; }
+        radial-gradient(ellipse 800px 600px at 20% 50%,rgba(59,110,247,0.18),transparent 70%),
+        radial-gradient(ellipse 600px 500px at 80% 30%,rgba(139,92,246,0.14),transparent 70%),
+        radial-gradient(ellipse 900px 400px at 50% 80%,rgba(16,185,129,0.10),transparent 70%);
+      animation:bgPulse 8s ease-in-out infinite alternate}
+    @keyframes bgPulse{0%{opacity:.6;transform:scale(1)}100%{opacity:1;transform:scale(1.05)}}
+    #particleCanvas{position:absolute;inset:0;z-index:1}
 
     /* Nav */
-    .hero-nav { position: relative; z-index: 10; padding: 20px 24px; max-width: 1280px; margin: 0 auto; width: 100%; display: flex; justify-content: space-between; align-items: center; }
-    .nav-brand { display: flex; align-items: center; gap: 10px; }
-    .nav-logo-icon { width: 36px; height: 36px; border-radius: 10px; overflow: hidden; }
-    .nav-logo-icon img { width: 100%; height: 100%; object-fit: cover; }
-    .nav-brand-text { font-size: 1.1rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
-    .nav-pill { display: flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 99px; padding: 6px 8px; }
-    .nav-pill a { color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 500; text-decoration: none; padding: 6px 14px; border-radius: 99px; transition: all 0.2s; }
-    .nav-pill a:hover { color: #fff; background: rgba(255,255,255,0.08); }
-    .nav-pill a.nav-cta { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); display: flex; align-items: center; gap: 4px; }
-    .nav-pill a.nav-cta:hover { background: rgba(255,255,255,0.18); color: #fff; }
-    .nav-hamburger { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+    .nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:16px 24px;transition:background .3s,backdrop-filter .3s}
+    .nav.scrolled{background:rgba(0,0,0,0.7);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.06)}
+    .nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-logo{width:34px;height:34px;border-radius:9px;overflow:hidden}
+    .nav-logo img{width:100%;height:100%;object-fit:cover}
+    .nav-brand-text{font-size:1rem;font-weight:700;color:#fff;letter-spacing:-0.02em}
+    .nav-links{display:flex;align-items:center;gap:2px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:99px;padding:5px 6px}
+    .nav-links a{color:rgba(255,255,255,0.55);font-size:0.8rem;font-weight:500;text-decoration:none;padding:7px 14px;border-radius:99px;transition:all .2s}
+    .nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08)}
+    .nav-links a.cta{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.9)}
+    .nav-links a.cta:hover{background:rgba(255,255,255,0.18);color:#fff}
+    .nav-hamburger{display:none;background:none;border:none;color:#fff;cursor:pointer;padding:8px}
 
-    /* Hero top bar — stats */
-    .hero-topbar { position: relative; z-index: 10; max-width: 1280px; margin: 0 auto; width: 100%; padding: 40px 24px 0; display: flex; justify-content: space-between; align-items: flex-start; }
-    .hero-topbar p { color: rgba(255,255,255,0.6); font-size: 0.85rem; max-width: 380px; line-height: 1.5; }
-    .hero-topbar .stat { text-align: right; color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 500; }
-    .hero-topbar .stat strong { display: block; font-size: 1.1rem; color: #fff; font-weight: 700; }
+    /* Mobile menu */
+    .mobile-menu{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.96);backdrop-filter:blur(24px);flex-direction:column;align-items:center;justify-content:center;gap:20px}
+    .mobile-menu.active{display:flex}
+    .mobile-menu a{color:#fff;font-size:1.1rem;font-weight:600;text-decoration:none;padding:14px 32px;border-radius:14px;transition:background .2s}
+    .mobile-menu a:hover{background:rgba(255,255,255,0.08)}
+    .mobile-menu-close{position:absolute;top:20px;right:20px;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer}
 
-    /* Hero center */
-    .hero-center { position: relative; z-index: 10; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 24px; }
-    .hero-pretitle { text-transform: uppercase; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
-    .hero-pretitle .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #34d399; margin-right: 8px; animation: dotPulse 2s ease-in-out infinite; }
-    @keyframes dotPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    /* Hero content */
+    .hero-content{position:relative;z-index:10;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 0}
+    .hero-pretitle{text-transform:uppercase;font-size:0.72rem;font-weight:600;letter-spacing:0.15em;color:rgba(255,255,255,0.55);margin-bottom:24px}
+    .hero-pretitle .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#34d399;margin-right:8px;animation:dotPulse 2s ease-in-out infinite}
+    @keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.3}}
+    .hero-h1{font-size:clamp(3rem,7vw,5.5rem);font-weight:800;line-height:.9;letter-spacing:-0.04em;margin-bottom:28px}
+    .hero-h1 .line1{display:block;color:#fff;font-weight:500;font-size:clamp(1.8rem,4vw,3.2rem);margin-bottom:8px}
+    .shiny-text{background:linear-gradient(100deg,#64CEFB 0%,#64CEFB 40%,#fff 50%,#64CEFB 60%,#64CEFB 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shiny 3s linear infinite}
+    @keyframes shiny{0%{background-position:100% 0}100%{background-position:-100% 0}}
+    .hero-sub{color:rgba(255,255,255,0.45);font-size:clamp(0.95rem,1.5vw,1.15rem);max-width:520px;margin-bottom:36px;font-weight:400}
+    .hero-cta{display:inline-block;transition:all .3s;text-decoration:none}
+    .hero-cta:hover{transform:translateY(-3px);filter:brightness(1.1)}
+    .hero-cta img{height:54px;width:auto}
 
-    .hero-heading { font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.04em; margin-bottom: 32px; }
-    .hero-heading .line1 { display: block; color: #fff; font-weight: 500; }
-    .hero-heading .line2 { display: block; }
-
-    /* Shiny text animation */
-    .shiny-text { background: linear-gradient(
-      100deg,
-      #64CEFB 0%,
-      #64CEFB 40%,
-      #ffffff 50%,
-      #64CEFB 60%,
-      #64CEFB 100%
-    );
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shinySlide 3s linear infinite;
+    /* ── iPhone Mockup ── */
+    .phone-showcase{position:relative;z-index:10;margin-top:56px;padding-bottom:80px;display:flex;justify-content:center;perspective:1200px}
+    .phone-frame{
+      width:280px;position:relative;
+      border-radius:48px;border:3px solid rgba(255,255,255,0.15);
+      background:linear-gradient(145deg,#1a1a2e,#0d0d1a);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.1),
+        0 0 60px rgba(255,255,255,0.15),
+        0 0 120px rgba(255,255,255,0.08),
+        0 30px 80px rgba(0,0,0,0.5);
+      overflow:hidden;
+      animation:phoneFloat 6s ease-in-out infinite;
+      transform-style:preserve-3d;
     }
-    @keyframes shinySlide {
-      0% { background-position: 100% 0; }
-      100% { background-position: -100% 0; }
+    @keyframes phoneFloat{0%,100%{transform:translateY(0) rotateX(2deg)}50%{transform:translateY(-12px) rotateX(0deg)}}
+    .phone-frame::before{
+      content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);
+      width:88px;height:26px;background:#000;border-radius:20px;z-index:10;
     }
+    .phone-frame::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(255,255,255,0.08) 0%,transparent 50%);
+      border-radius:45px;z-index:5;pointer-events:none;
+    }
+    .phone-screen{display:block;width:100%;border-radius:45px}
+    .phone-glow{position:absolute;width:400px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%);
+      background:radial-gradient(circle,rgba(59,130,246,0.15) 0%,transparent 70%);
+      z-index:-1;filter:blur(40px);pointer-events:none}
+    .phone-reflection{position:absolute;inset:0;border-radius:45px;
+      background:linear-gradient(170deg,rgba(255,255,255,0.12) 0%,transparent 40%);
+      z-index:6;pointer-events:none}
 
-    .hero-subtitle { color: rgba(255,255,255,0.5); font-size: clamp(0.9rem, 1.5vw, 1.1rem); max-width: 500px; margin-bottom: 40px; font-weight: 400; }
+    /* ── Stats Bar ── */
+    .stats-bar{position:relative;z-index:10;padding:40px 24px 80px}
+    .stats-inner{max-width:900px;margin:0 auto;display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
+    .stat-item{text-align:center}
+    .stat-value{font-size:1.8rem;font-weight:800;color:#fff;letter-spacing:-0.02em}
+    .stat-value .accent{color:#64CEFB}
+    .stat-value .counter{display:inline-block;min-width:1.2ch;text-align:right}
+    .stat-label{font-size:0.68rem;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.12em;font-weight:600;margin-top:4px}
 
-    /* CTA button */
-    .hero-cta { display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #000; font-size: 0.95rem; font-weight: 700; padding: 16px 32px; border-radius: 99px; text-decoration: none; transition: all 0.3s; border: none; cursor: pointer; }
-    .hero-cta:hover { background: #e2e8f0; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,255,255,0.15); }
-    .hero-cta .arrow { display: inline-flex; transition: transform 0.3s; }
-    .hero-cta:hover .arrow { transform: translateX(4px); }
+    /* ── How it Works ── */
+    .how-section{background:#030612;padding:100px 24px;position:relative;overflow:hidden}
+    .how-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(100,206,251,0.2),transparent)}
+    .how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;position:relative}
+    .how-grid::before{content:'';position:absolute;top:40px;left:12%;right:12%;height:2px;
+      background:linear-gradient(90deg,rgba(59,130,246,0.3),rgba(139,92,246,0.3),rgba(16,185,129,0.3),rgba(100,206,251,0.3));
+      z-index:0}
+    .how-step{text-align:center;position:relative;z-index:1}
+    .how-num{width:80px;height:80px;border-radius:50%;
+      background:rgba(59,130,246,0.08);border:2px solid rgba(59,130,246,0.2);
+      display:flex;align-items:center;justify-content:center;margin:0 auto 20px;
+      position:relative;transition:all .4s}
+    .how-step:hover .how-num{background:rgba(59,130,246,0.15);border-color:rgba(59,130,246,0.4);transform:scale(1.08)}
+    .how-num span{font-size:1.5rem;font-weight:800;color:#64CEFB}
+    .how-icon{margin-bottom:14px}
+    .how-icon .material-symbols-outlined{font-size:28px;color:#64CEFB;font-variation-settings:'FILL' 1}
+    .how-step h3{font-size:1rem;font-weight:700;color:#f1f5f9;margin-bottom:8px}
+    .how-step p{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.5;max-width:220px;margin:0 auto}
 
-    /* Bottom stats row */
-    .hero-bottom { position: relative; z-index: 10; max-width: 1280px; margin: 0 auto; width: 100%; padding: 0 24px 40px; display: flex; justify-content: center; gap: 48px; }
-    .hero-stat { text-align: center; }
-    .hero-stat-value { font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
-    .hero-stat-value .accent { color: #64CEFB; }
-    .hero-stat-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-top: 4px; }
+    /* Step-specific colors */
+    .how-step:nth-child(2) .how-num{background:rgba(139,92,246,0.08);border-color:rgba(139,92,246,0.2)}
+    .how-step:nth-child(2):hover .how-num{background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.4)}
+    .how-step:nth-child(2) .how-icon .material-symbols-outlined{color:#c180ff}
+    .how-step:nth-child(2) .how-num span{color:#c180ff}
+    .how-step:nth-child(3) .how-num{background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.2)}
+    .how-step:nth-child(3):hover .how-num{background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.4)}
+    .how-step:nth-child(3) .how-icon .material-symbols-outlined{color:#34d399}
+    .how-step:nth-child(3) .how-num span{color:#34d399}
+    .how-step:nth-child(4) .how-num{background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.2)}
+    .how-step:nth-child(4):hover .how-num{background:rgba(251,191,36,0.15);border-color:rgba(251,191,36,0.4)}
+    .how-step:nth-child(4) .how-icon .material-symbols-outlined{color:#fbbf24}
+    .how-step:nth-child(4) .how-num span{color:#fbbf24}
 
-    /* ── Features Section ── */
-    .features-section { position: relative; background: #030612; padding: 100px 24px; }
-    .features-section .container { max-width: 1280px; margin: 0 auto; }
-    .features-header { text-align: center; margin-bottom: 64px; }
-    .features-header h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: #f1f5f9; margin-bottom: 12px; letter-spacing: -0.02em; }
-    .features-header p { color: rgba(255,255,255,0.5); font-size: 1rem; }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-    .feature-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 32px; transition: all 0.3s; position: relative; overflow: hidden; }
-    .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(100,206,251,0.3), transparent); opacity: 0; transition: opacity 0.3s; }
-    .feature-card:hover { border-color: rgba(100,206,251,0.15); transform: translateY(-4px); background: rgba(255,255,255,0.05); }
-    .feature-card:hover::before { opacity: 1; }
-    .feature-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
-    .feature-icon .material-symbols-outlined { font-size: 24px; font-variation-settings: 'FILL' 1, 'wght' 400; }
-    .icon-blue { background: rgba(59,110,247,0.12); color: #5b8aff; }
-    .icon-green { background: rgba(16,185,129,0.12); color: #34d399; }
-    .icon-purple { background: rgba(139,92,246,0.12); color: #c180ff; }
-    .icon-amber { background: rgba(245,158,11,0.12); color: #fbbf24; }
-    .icon-rose { background: rgba(244,63,94,0.12); color: #fb7185; }
-    .icon-teal { background: rgba(20,184,166,0.12); color: #2dd4bf; }
-    .feature-card h3 { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; margin-bottom: 8px; }
-    .feature-card p { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+    /* ── Features ── */
+    .features-section{background:#000;padding:100px 24px;position:relative}
+    .features-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(100,206,251,0.15),transparent)}
+    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .feature-card{
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:24px;padding:36px 28px;
+      transition:all .4s cubic-bezier(.16,1,.3,1);
+      position:relative;overflow:hidden;cursor:default}
+    .feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(100,206,251,0.3),transparent);opacity:0;transition:opacity .4s}
+    .feature-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+      background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(100,206,251,0.06) 0%,transparent 50%);
+      opacity:0;transition:opacity .4s;pointer-events:none}
+    .feature-card:hover{border-color:rgba(100,206,251,0.15);transform:translateY(-6px);background:rgba(255,255,255,0.04)}
+    .feature-card:hover::before,.feature-card:hover::after{opacity:1}
+    .feature-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+    .feature-icon .material-symbols-outlined{font-size:26px;font-variation-settings:'FILL' 1,'wght' 400}
+    .icon-blue{background:rgba(59,110,247,0.12);color:#5b8aff}
+    .icon-green{background:rgba(16,185,129,0.12);color:#34d399}
+    .icon-purple{background:rgba(139,92,246,0.12);color:#c180ff}
+    .icon-amber{background:rgba(245,158,11,0.12);color:#fbbf24}
+    .icon-rose{background:rgba(244,63,94,0.12);color:#fb7185}
+    .icon-teal{background:rgba(20,184,166,0.12);color:#2dd4bf}
+    .feature-card h3{font-size:1.05rem;font-weight:700;color:#f1f5f9;margin-bottom:8px}
+    .feature-card p{font-size:0.85rem;color:rgba(255,255,255,0.4);line-height:1.6}
 
-    /* ── Privacy Section ── */
-    .privacy-section { background: #030612; padding: 0 24px 100px; }
-    .privacy-section .container { max-width: 1280px; margin: 0 auto; }
-    .privacy-banner { background: rgba(16,185,129,0.04); border: 1px solid rgba(16,185,129,0.12); border-radius: 24px; padding: 48px; text-align: center; position: relative; overflow: hidden; }
-    .privacy-banner::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 200px; height: 1px; background: linear-gradient(90deg, transparent, rgba(52,211,153,0.5), transparent); }
-    .privacy-banner h2 { font-size: 1.5rem; font-weight: 700; color: #34d399; margin-bottom: 12px; }
-    .privacy-banner p { color: rgba(255,255,255,0.5); max-width: 520px; margin: 0 auto; font-size: 0.95rem; }
+    /* ── App Screens Gallery ── */
+    .gallery-section{background:#030612;padding:100px 24px;position:relative;overflow:hidden}
+    .gallery-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(100,206,251,0.15),transparent)}
+    .gallery-scroll{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:48px}
+    .gallery-phone{width:200px;position:relative;border-radius:32px;border:2px solid rgba(255,255,255,0.1);
+      background:linear-gradient(145deg,#1a1a2e,#0d0d1a);overflow:hidden;
+      box-shadow:0 0 40px rgba(255,255,255,0.1),0 0 80px rgba(255,255,255,0.06),0 20px 50px rgba(0,0,0,0.4);transition:all .5s cubic-bezier(.16,1,.3,1)}
+    .gallery-phone:hover{transform:translateY(-12px) scale(1.03);border-color:rgba(255,255,255,0.25);
+      box-shadow:0 0 60px rgba(255,255,255,0.18),0 0 120px rgba(255,255,255,0.08),0 30px 70px rgba(0,0,0,0.5)}
+    .gallery-phone::before{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);
+      width:60px;height:18px;background:#000;border-radius:14px;z-index:10}
+    .gallery-phone img{width:100%;display:block;border-radius:30px}
+    .gallery-label{text-align:center;margin-top:14px;font-size:0.75rem;font-weight:600;color:rgba(255,255,255,0.4);letter-spacing:0.05em}
+
+    /* ── Privacy ── */
+    .privacy-section{background:#000;padding:80px 24px 100px;position:relative}
+    .privacy-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(52,211,153,0.2),transparent)}
+    .privacy-banner{
+      background:rgba(16,185,129,0.03);border:1px solid rgba(16,185,129,0.1);
+      border-radius:28px;padding:56px 48px;text-align:center;position:relative;overflow:hidden;
+      max-width:800px;margin:0 auto}
+    .privacy-banner::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:200px;height:1px;background:linear-gradient(90deg,transparent,rgba(52,211,153,0.5),transparent)}
+    .privacy-banner .material-symbols-outlined{font-size:48px;color:#34d399;margin-bottom:16px;font-variation-settings:'FILL' 1}
+    .privacy-banner h2{font-size:1.6rem;font-weight:700;color:#34d399;margin-bottom:14px}
+    .privacy-banner p{color:rgba(255,255,255,0.45);max-width:520px;margin:0 auto;font-size:0.95rem;line-height:1.7}
 
     /* ── Footer ── */
-    footer { background: #000; border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 24px; text-align: center; }
-    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
-    footer a { color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
-    footer a:hover { color: #64CEFB; }
+    footer{background:#000;border-top:1px solid rgba(255,255,255,0.05);padding:40px 24px;text-align:center}
+    footer img{border-radius:12px;margin-bottom:14px}
+    footer p{font-size:0.8rem;color:rgba(255,255,255,0.25);margin-bottom:8px}
+    footer a{color:rgba(255,255,255,0.25);text-decoration:none;font-size:0.8rem;transition:color .2s}
+    footer a:hover{color:#64CEFB}
+    .social-links{display:flex;justify-content:center;gap:16px;margin:18px 0}
+    .social-links a{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);transition:all .3s}
+    .social-links a:hover{background:rgba(100,206,251,0.1);border-color:rgba(100,206,251,0.25);transform:translateY(-2px)}
+    .social-links a svg{width:18px;height:18px;fill:rgba(255,255,255,0.4);transition:fill .3s}
+    .social-links a:hover svg{fill:#64CEFB}
+
+    /* ── Floating Orbs (grandiosa) ── */
+    .orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:orbFloat 12s ease-in-out infinite alternate}
+    .orb-1{width:500px;height:500px;background:rgba(59,110,247,0.08);top:-10%;left:-10%;animation-duration:14s}
+    .orb-2{width:400px;height:400px;background:rgba(139,92,246,0.06);bottom:10%;right:-8%;animation-duration:10s;animation-delay:2s}
+    .orb-3{width:350px;height:350px;background:rgba(16,185,129,0.05);bottom:30%;left:20%;animation-duration:16s;animation-delay:4s}
+    @keyframes orbFloat{0%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.1)}100%{transform:translate(-20px,30px) scale(0.95)}}
+
+    /* ── Glowing CTA Banner ── */
+    .cta-section{background:#030612;padding:80px 24px;position:relative;overflow:hidden}
+    .cta-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(100,206,251,0.2),transparent)}
+    .cta-banner{background:linear-gradient(135deg,rgba(59,110,247,0.1),rgba(139,92,246,0.08));
+      border:1px solid rgba(100,206,251,0.12);border-radius:32px;padding:64px 48px;text-align:center;
+      position:relative;overflow:hidden;max-width:900px;margin:0 auto}
+    .cta-banner::before{content:'';position:absolute;inset:-2px;border-radius:34px;
+      background:linear-gradient(135deg,rgba(100,206,251,0.2),rgba(139,92,246,0.15),rgba(52,211,153,0.1));
+      z-index:-1;filter:blur(1px)}
+    .cta-banner::after{content:'';position:absolute;top:-100%;left:-50%;width:200%;height:200%;
+      background:conic-gradient(from 0deg,transparent,rgba(100,206,251,0.05),transparent,rgba(139,92,246,0.05),transparent);
+      animation:ctaRotate 8s linear infinite;z-index:-1}
+    @keyframes ctaRotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+    .cta-banner h2{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:#f1f5f9;margin-bottom:14px;letter-spacing:-0.03em}
+    .cta-banner p{color:rgba(255,255,255,0.45);font-size:1rem;max-width:480px;margin:0 auto 32px}
+    .cta-banner .hero-cta img{height:54px}
+
+    /* ── Pulse ring on phone ── */
+    .phone-pulse{position:absolute;width:320px;height:620px;top:50%;left:50%;transform:translate(-50%,-50%);
+      border:1px solid rgba(255,255,255,0.04);border-radius:52px;animation:pulseRing 4s ease-out infinite;pointer-events:none}
+    .phone-pulse:nth-child(2){animation-delay:1.3s;width:360px;height:660px;border-radius:56px}
+    .phone-pulse:nth-child(3){animation-delay:2.6s;width:400px;height:700px;border-radius:60px}
+    @keyframes pulseRing{0%{opacity:.5;transform:translate(-50%,-50%) scale(.95)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.15)}}
 
     /* ── Responsive ── */
-    @media (max-width: 1024px) {
-      .nav-pill { display: none; }
-      .nav-hamburger { display: block; }
-      .hero-topbar { flex-direction: column; gap: 16px; }
-      .hero-topbar .stat { text-align: left; }
+    @media(max-width:1024px){
+      .nav-links{display:none}
+      .nav-hamburger{display:block}
+      .how-grid{grid-template-columns:repeat(2,1fr);gap:40px}
+      .how-grid::before{display:none}
+      .features-grid{grid-template-columns:repeat(2,1fr)}
     }
-    @media (max-width: 640px) {
-      .hero-heading { font-size: clamp(2.5rem, 12vw, 4rem); }
-      .hero-bottom { gap: 24px; flex-wrap: wrap; }
-      .hero-cta { padding: 14px 24px; font-size: 0.9rem; }
-      .features-grid { grid-template-columns: 1fr; }
+    @media(max-width:640px){
+      .hero-h1{font-size:clamp(2.5rem,12vw,4rem)}
+      .hero-h1 .line1{font-size:clamp(1.4rem,5vw,2rem)}
+      .hero-cta img{height:46px}
+      .phone-frame{width:240px}
+      .stats-inner{gap:24px}
+      .stat-value{font-size:1.4rem}
+      .how-grid{grid-template-columns:1fr 1fr}
+      .features-grid{grid-template-columns:1fr}
+      .gallery-phone{width:160px}
+      .privacy-banner{padding:36px 24px}
     }
   </style>
 </head>
 <body>
 
-  <!-- ════════ HERO ════════ -->
-  <section class="hero-section">
-    <!-- Background layers -->
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">
+        <div class="nav-logo"><img src="logo.png" alt="Zenith Finance 360" width="34" height="34"></div>
+        <span class="nav-brand-text">Zenith Finance 360</span>
+      </a>
+      <div class="nav-links">
+        <a href="#how">Como funciona</a>
+        <a href="#features">Funciones</a>
+        <a href="#screens">Pantallas</a>
+        <a href="privacy.html">Privacidad</a>
+        <a href="#" class="cta">App Store <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
+      </div>
+      <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active')">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <a href="#how" onclick="this.parentElement.classList.remove('active')">Como funciona</a>
+    <a href="#features" onclick="this.parentElement.classList.remove('active')">Funciones</a>
+    <a href="#screens" onclick="this.parentElement.classList.remove('active')">Pantallas</a>
+    <a href="privacy.html">Privacidad</a>
+    <a href="#">App Store</a>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
     <div class="hero-bg"></div>
     <canvas id="particleCanvas"></canvas>
 
-    <!-- Nav -->
-    <nav class="hero-nav">
-      <div class="nav-brand">
-        <div class="nav-logo-icon"><img src="logo.png" alt="Zenith Finance 360" width="36" height="36"></div>
-        <span class="nav-brand-text">Zenith Finance 360</span>
-      </div>
-      <div class="nav-pill">
-        <a href="#features">Funciones</a>
-        <a href="#privacy">Privacidad</a>
-        <a href="privacy.html">Legal</a>
-        <a href="#" class="nav-cta">App Store <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>
-      </div>
-      <button class="nav-hamburger" aria-label="Menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-      </button>
-    </nav>
-
-    <!-- Top bar -->
-    <div class="hero-topbar">
-      <p>Herramientas financieras profesionales con privacidad total. Sin servidores, sin nube, sin rastreo de datos.</p>
-      <div class="stat">
-        <strong>100% Offline</strong>
-        Tus datos nunca salen de tu dispositivo
-      </div>
-    </div>
-
-    <!-- Center content -->
-    <div class="hero-center">
-      <div class="hero-pretitle">
+    <div class="hero-content">
+      <div class="hero-pretitle reveal">
         <span class="dot"></span>
         Disponible pronto en App Store
       </div>
-      <h1 class="hero-heading">
+      <h1 class="hero-h1 reveal reveal-delay-1">
         <span class="line1">Control total de</span>
-        <span class="line2 shiny-text">Tus Finanzas.</span>
+        <span class="shiny-text">Tus Finanzas.</span>
       </h1>
-      <p class="hero-subtitle">Dashboard inteligente, semáforo de gastos, coach financiero y metas. Todo en tu iPhone.</p>
-      <a href="#" class="hero-cta">
-        Descargar en App Store
-        <span class="arrow">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-        </span>
+      <p class="hero-sub reveal reveal-delay-2">Dashboard inteligente, semáforo de gastos, coach financiero y metas. Todo en tu iPhone, 100% privado.</p>
+      <a href="#" class="hero-cta reveal reveal-delay-3">
+        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
       </a>
     </div>
 
-    <!-- Bottom stats -->
-    <div class="hero-bottom">
-      <div class="hero-stat">
-        <div class="hero-stat-value"><span class="accent">6</span> Módulos</div>
-        <div class="hero-stat-label">Financieros integrados</div>
+    <!-- iPhone with REAL screenshot -->
+    <div class="phone-showcase reveal reveal-delay-4">
+      <div class="phone-glow"></div>
+      <div class="phone-pulse"></div>
+      <div class="phone-pulse"></div>
+      <div class="phone-pulse"></div>
+      <div class="phone-frame">
+        <img class="phone-screen" src="screenshot_dashboard.png" alt="Zenith Finance 360 Dashboard">
+        <div class="phone-reflection"></div>
       </div>
-      <div class="hero-stat">
-        <div class="hero-stat-value"><span class="accent">2</span> Idiomas</div>
-        <div class="hero-stat-label">Español e Inglés</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-value"><span class="accent">0</span> Datos</div>
-        <div class="hero-stat-label">Enviados a la nube</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-value"><span class="accent">&infin;</span> Privacidad</div>
-        <div class="hero-stat-label">Todo en tu dispositivo</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stats-inner">
+        <div class="stat-item reveal"><div class="stat-value"><span class="accent counter" data-target="6">0</span> Módulos</div><div class="stat-label">Financieros integrados</div></div>
+        <div class="stat-item reveal reveal-delay-1"><div class="stat-value"><span class="accent counter" data-target="2">0</span> Idiomas</div><div class="stat-label">Español e Inglés</div></div>
+        <div class="stat-item reveal reveal-delay-2"><div class="stat-value"><span class="accent counter" data-target="0">0</span> Datos</div><div class="stat-label">Enviados a la nube</div></div>
+        <div class="stat-item reveal reveal-delay-3"><div class="stat-value"><span class="accent counter" data-target="100">0</span><span class="accent">%</span> Privacidad</div><div class="stat-label">Todo en tu dispositivo</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ════════ FEATURES ════════ -->
-  <section class="features-section" id="features">
-    <div class="container">
-      <div class="features-header">
-        <h2>Todo lo que necesitas en un solo lugar</h2>
-        <p>Herramientas financieras profesionales con la simplicidad que mereces.</p>
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="how-section" id="how" style="position:relative">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="container" style="text-align:center">
+      <div class="section-badge reveal"><span class="material-symbols-outlined">rocket_launch</span> Comenzar</div>
+      <h2 class="section-title reveal">Toma el control en 4 pasos</h2>
+      <p class="section-sub reveal">Empieza a gestionar tus finanzas en minutos, sin complicaciones.</p>
+
+      <div class="how-grid">
+        <div class="how-step reveal">
+          <div class="how-num"><span>1</span></div>
+          <div class="how-icon"><span class="material-symbols-outlined">download</span></div>
+          <h3>Descarga la app</h3>
+          <p>Descarga Zenith Finance 360 desde el App Store. Gratis, sin suscripciones ocultas.</p>
+        </div>
+        <div class="how-step reveal reveal-delay-1">
+          <div class="how-num"><span>2</span></div>
+          <div class="how-icon"><span class="material-symbols-outlined">account_balance</span></div>
+          <h3>Configura tus cuentas</h3>
+          <p>Agrega tus cuentas bancarias, tarjetas de crédito e inversiones en un solo lugar.</p>
+        </div>
+        <div class="how-step reveal reveal-delay-2">
+          <div class="how-num"><span>3</span></div>
+          <div class="how-icon"><span class="material-symbols-outlined">swap_vert</span></div>
+          <h3>Registra tus movimientos</h3>
+          <p>Registra ingresos y gastos manualmente o importa desde SMS, correos y PDFs bancarios.*</p>
+        </div>
+        <div class="how-step reveal reveal-delay-3">
+          <div class="how-num"><span>4</span></div>
+          <div class="how-icon"><span class="material-symbols-outlined">emoji_objects</span></div>
+          <h3>Toma el control</h3>
+          <p>Obtén alertas inteligentes, visualiza tu presupuesto y alcanza tus metas financieras.</p>
+        </div>
       </div>
+      <p style="margin-top:28px;font-size:0.72rem;color:rgba(255,255,255,0.25);font-style:italic">* La importación de PDFs bancarios depende del formato del estado de cuenta. Algunos documentos con gráficas o logos complejos pueden requerir ajustes.</p>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="features-section" id="features">
+    <div class="container" style="text-align:center">
+      <div class="section-badge reveal"><span class="material-symbols-outlined">auto_awesome</span> Funciones</div>
+      <h2 class="section-title reveal">Todo lo que necesitas en un solo lugar</h2>
+      <p class="section-sub reveal">Herramientas financieras profesionales con la simplicidad que mereces.</p>
+
       <div class="features-grid">
-        <div class="feature-card">
+        <div class="feature-card reveal">
           <div class="feature-icon icon-blue"><span class="material-symbols-outlined">dashboard</span></div>
           <h3>Dashboard Inteligente</h3>
           <p>Visualiza tu dinero disponible, deudas, gasto mensual y patrimonio neto en un solo vistazo.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal reveal-delay-1">
           <div class="feature-icon icon-amber"><span class="material-symbols-outlined">traffic</span></div>
           <h3>Semáforo de Gastos</h3>
           <p>Sistema visual de colores que te indica al instante qué categorías están dentro, cerca o fuera de tu presupuesto.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal reveal-delay-2">
           <div class="feature-icon icon-purple"><span class="material-symbols-outlined">psychology</span></div>
           <h3>Coach Financiero</h3>
           <p>Alertas inteligentes sobre uso de tarjetas, fondo de emergencia, gastos fijos y comportamiento de variables.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal reveal-delay-1">
           <div class="feature-icon icon-green"><span class="material-symbols-outlined">flag</span></div>
           <h3>Metas Financieras</h3>
           <p>Crea metas con montos y fechas. Vincula cuentas reales y visualiza tu progreso automáticamente.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal reveal-delay-2">
           <div class="feature-icon icon-rose"><span class="material-symbols-outlined">credit_card</span></div>
           <h3>Cuentas y Tarjetas</h3>
           <p>Administra bancos, tarjetas de crédito, inversiones, préstamos y cuentas de terceros en un solo lugar.</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card reveal reveal-delay-3">
           <div class="feature-icon icon-teal"><span class="material-symbols-outlined">document_scanner</span></div>
           <h3>Importador Inteligente</h3>
           <p>Pega texto de SMS o correos bancarios y detecta transacciones automáticamente. Procesa PDFs de estados de cuenta.</p>
@@ -266,146 +431,138 @@
     </div>
   </section>
 
-  <!-- ════════ PRIVACY ════════ -->
+  <!-- ═══ APP SCREENS ═══ -->
+  <section class="gallery-section" id="screens" style="position:relative">
+    <div class="orb orb-3"></div>
+    <div class="container" style="text-align:center">
+      <div class="section-badge reveal"><span class="material-symbols-outlined">phone_iphone</span> Pantallas</div>
+      <h2 class="section-title reveal">Diseñada para ti</h2>
+      <p class="section-sub reveal">Interfaz oscura premium, optimizada para cada detalle de tus finanzas.</p>
+
+      <div class="gallery-scroll">
+        <div class="reveal">
+          <div class="gallery-phone"><img src="screenshot_dashboard.png" alt="Dashboard"></div>
+          <div class="gallery-label">Dashboard</div>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <div class="gallery-phone"><img src="screenshot_accounts.png" alt="Cuentas"></div>
+          <div class="gallery-label">Cuentas</div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="gallery-phone"><img src="screenshot_transactions.png" alt="Movimientos"></div>
+          <div class="gallery-label">Movimientos</div>
+        </div>
+        <div class="reveal reveal-delay-3">
+          <div class="gallery-phone"><img src="screenshot_budget.png" alt="Plan"></div>
+          <div class="gallery-label">Plan</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRIVACY ═══ -->
   <section class="privacy-section" id="privacy">
     <div class="container">
-      <div class="privacy-banner">
+      <div class="privacy-banner reveal">
+        <span class="material-symbols-outlined">shield</span>
         <h2>Privacidad como prioridad</h2>
         <p>Todos tus datos se almacenan exclusivamente en tu dispositivo. Sin servidores, sin cuentas, sin rastreo. Tu información financiera es solo tuya.</p>
       </div>
     </div>
   </section>
 
-  <!-- ════════ FOOTER ════════ -->
+  <!-- ═══ CTA ═══ -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2>Tu dinero. Tu control. Tu privacidad.</h2>
+        <p>Descarga Zenith Finance 360 y toma el control total de tus finanzas personales hoy mismo.</p>
+        <a href="#" class="hero-cta">
+          <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
   <footer>
-    <img src="logo.png" alt="Zenith Finance 360" width="48" height="48" style="border-radius:12px;margin-bottom:12px;">
+    <img src="logo.png" alt="Zenith Finance 360" width="48" height="48">
+    <div class="social-links">
+      <a href="#" aria-label="Facebook" title="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="#" aria-label="Instagram" title="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+    </div>
     <p>&copy; 2026 Zenith Finance 360. Todos los derechos reservados.</p>
     <a href="privacy.html">Política de Privacidad</a>
   </footer>
 
   <script>
-    (function() {
-      var canvas = document.getElementById('particleCanvas');
-      var ctx = canvas.getContext('2d');
-      var particles = [];
-      var particleCount = 80;
-      var maxDist = 150;
-      var mouse = { x: -999, y: -999 };
+  (function(){
+    /* ── Particle Animation ── */
+    var canvas=document.getElementById('particleCanvas'),ctx=canvas.getContext('2d'),particles=[],count=80,maxDist=150,mouse={x:-999,y:-999};
+    function resize(){var h=canvas.parentElement;canvas.width=h.offsetWidth;canvas.height=h.offsetHeight}
+    resize();window.addEventListener('resize',resize);
+    canvas.addEventListener('mousemove',function(e){var r=canvas.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top});
+    canvas.addEventListener('mouseleave',function(){mouse.x=-999;mouse.y=-999});
+    var colors=[{r:100,g:206,b:251},{r:91,g:138,b:255},{r:193,g:128,b:255},{r:52,g:211,b:153}];
+    for(var i=0;i<count;i++){var c=colors[Math.floor(Math.random()*colors.length)];
+      particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,radius:Math.random()*2+1,color:c,alpha:Math.random()*.5+.2,pulse:Math.random()*Math.PI*2})}
+    function dist(a,b){var dx=a.x-b.x,dy=a.y-b.y;return Math.sqrt(dx*dx+dy*dy)}
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(var i=0;i<particles.length;i++){
+        var p=particles[i];p.pulse+=.02;p.x+=p.vx;p.y+=p.vy;
+        if(p.x<0||p.x>canvas.width)p.vx*=-1;if(p.y<0||p.y>canvas.height)p.vy*=-1;
+        var md=dist(p,mouse);if(md<120){var f=(120-md)/120*.8;p.x+=(p.x-mouse.x)/md*f;p.y+=(p.y-mouse.y)/md*f}
+        var a=p.alpha+Math.sin(p.pulse)*.15;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.radius*3,0,Math.PI*2);ctx.fillStyle='rgba('+p.color.r+','+p.color.g+','+p.color.b+','+(a*.15)+')';ctx.fill();
+        ctx.beginPath();ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);ctx.fillStyle='rgba('+p.color.r+','+p.color.g+','+p.color.b+','+a+')';ctx.fill()}
+      for(var i=0;i<particles.length;i++){
+        for(var j=i+1;j<particles.length;j++){var d=dist(particles[i],particles[j]);if(d<maxDist){var o=(1-d/maxDist)*.15;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle='rgba(100,206,251,'+o+')';ctx.lineWidth=.5;ctx.stroke()}}
+        var dm=dist(particles[i],mouse);if(dm<200){var o=(1-dm/200)*.3;ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(mouse.x,mouse.y);ctx.strokeStyle='rgba(100,206,251,'+o+')';ctx.lineWidth=.8;ctx.stroke()}}
+      requestAnimationFrame(animate)}
+    animate();
 
-      function resize() {
-        var hero = canvas.parentElement;
-        canvas.width = hero.offsetWidth;
-        canvas.height = hero.offsetHeight;
-      }
-      resize();
-      window.addEventListener('resize', resize);
+    /* ── Scroll Reveal ── */
+    var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
 
-      canvas.addEventListener('mousemove', function(e) {
-        var r = canvas.getBoundingClientRect();
-        mouse.x = e.clientX - r.left;
-        mouse.y = e.clientY - r.top;
-      });
-      canvas.addEventListener('mouseleave', function() {
-        mouse.x = -999;
-        mouse.y = -999;
-      });
+    /* ── Nav scroll effect ── */
+    window.addEventListener('scroll',function(){document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>60)});
 
-      // Colors for particles
-      var colors = [
-        { r: 100, g: 206, b: 251 },  // cyan
-        { r: 91, g: 138, b: 255 },   // blue
-        { r: 193, g: 128, b: 255 },  // purple
-        { r: 52, g: 211, b: 153 },   // green
-      ];
-
-      for (var i = 0; i < particleCount; i++) {
-        var c = colors[Math.floor(Math.random() * colors.length)];
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          radius: Math.random() * 2 + 1,
-          color: c,
-          alpha: Math.random() * 0.5 + 0.2,
-          pulse: Math.random() * Math.PI * 2
-        });
-      }
-
-      function dist(a, b) {
-        var dx = a.x - b.x, dy = a.y - b.y;
-        return Math.sqrt(dx * dx + dy * dy);
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Update & draw particles
-        for (var i = 0; i < particles.length; i++) {
-          var p = particles[i];
-          p.pulse += 0.02;
-          p.x += p.vx;
-          p.y += p.vy;
-
-          // Bounce off edges
-          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-          // Mouse repulsion
-          var md = dist(p, mouse);
-          if (md < 120) {
-            var force = (120 - md) / 120 * 0.8;
-            p.x += (p.x - mouse.x) / md * force;
-            p.y += (p.y - mouse.y) / md * force;
-          }
-
-          // Pulsing alpha
-          var a = p.alpha + Math.sin(p.pulse) * 0.15;
-
-          // Glow
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(' + p.color.r + ',' + p.color.g + ',' + p.color.b + ',' + (a * 0.15) + ')';
-          ctx.fill();
-
-          // Core
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(' + p.color.r + ',' + p.color.g + ',' + p.color.b + ',' + a + ')';
-          ctx.fill();
-        }
-
-        // Draw connections
-        for (var i = 0; i < particles.length; i++) {
-          for (var j = i + 1; j < particles.length; j++) {
-            var d = dist(particles[i], particles[j]);
-            if (d < maxDist) {
-              var opacity = (1 - d / maxDist) * 0.15;
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.strokeStyle = 'rgba(100,206,251,' + opacity + ')';
-              ctx.lineWidth = 0.5;
-              ctx.stroke();
+    /* ── Animated Counters ── */
+    var countersStarted=false;
+    var statsObserver=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting&&!countersStarted){
+          countersStarted=true;
+          document.querySelectorAll('.counter').forEach(function(el){
+            var target=parseInt(el.getAttribute('data-target'));
+            var duration=1500;
+            var start=performance.now();
+            function tick(now){
+              var elapsed=now-start;
+              var progress=Math.min(elapsed/duration,1);
+              var eased=1-Math.pow(1-progress,3);
+              el.textContent=Math.round(target*eased);
+              if(progress<1)requestAnimationFrame(tick);
             }
-          }
-          // Mouse connections
-          var dm = dist(particles[i], mouse);
-          if (dm < 200) {
-            var opacity = (1 - dm / 200) * 0.3;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = 'rgba(100,206,251,' + opacity + ')';
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          }
+            requestAnimationFrame(tick);
+          });
+          statsObserver.unobserve(e.target);
         }
+      });
+    },{threshold:0.5});
+    var statsBar=document.querySelector('.stats-bar');
+    if(statsBar)statsObserver.observe(statsBar);
 
-        requestAnimationFrame(animate);
-      }
-      animate();
-    })();
+    /* ── Feature card mouse glow ── */
+    document.querySelectorAll('.feature-card').forEach(function(card){
+      card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect();card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')})});
+  })();
   </script>
 </body>
 </html>
