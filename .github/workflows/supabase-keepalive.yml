@@ -1,0 +1,25 @@
+name: Supabase Keep-Alive
+
+on:
+  schedule:
+    # Cada 3 días a las 9 AM UTC (3 AM Guatemala)
+    - cron: '0 9 */3 * *'
+  workflow_dispatch:  # Permite ejecutarlo manualmente desde GitHub UI
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase Edge Function
+        run: |
+          echo "Pinging Supabase to keep project active..."
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST "https://dmiaklorsfhmdxpccina.supabase.co/functions/v1/scan-receipt" \
+            -H "Content-Type: application/json" \
+            -d '{"image":"keepalive","language":"es"}')
+          echo "HTTP Status: $RESPONSE"
+          if [ "$RESPONSE" -lt 200 ] || [ "$RESPONSE" -ge 500 ]; then
+            echo "Error: Unexpected response code"
+            exit 1
+          fi
+          echo "Supabase project pinged successfully"
