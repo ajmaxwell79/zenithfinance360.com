@@ -6,6 +6,11 @@ on:
     - cron: '0 9 * * *'
   workflow_dispatch:  # Permite ejecutarlo manualmente desde GitHub UI
 
+env:
+  # Anon key: pública por diseño. La función tiene verify_jwt=true, sin esto el
+  # gateway responde 401 y la invocación no llega a la función.
+  SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRtaWFrbG9yc2ZobWR4cGNjaW5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0OTE4ODgsImV4cCI6MjA5MjA2Nzg4OH0.K6Q0DnX3TdA24CYlVPWhRlZjSxizjDTE9dVzsqcCgOc
+
 jobs:
   ping:
     runs-on: ubuntu-latest
@@ -14,12 +19,15 @@ jobs:
         run: |
           echo "Pinging Supabase to keep project active..."
           for i in 1 2 3; do
+            # Payload vacío: invoca la función real pero sale en la validación
+            # "Missing image" (400) ANTES de llamar al API de Claude — costo cero
             RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" \
               -X POST "https://dmiaklorsfhmdxpccina.supabase.co/functions/v1/scan-receipt" \
               -H "Content-Type: application/json" \
-              -d '{"image":"keepalive","language":"es"}')
-            echo "Ping $i → HTTP $RESPONSE"
-            # Solo fallar si no hubo respuesta (timeout, DNS, proyecto pausado)
+              -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
+              -H "apikey: $SUPABASE_ANON_KEY" \
+              -d '{}')
+            echo "Ping $i → HTTP $RESPONSE (400 = función viva, esperado)"
             if [ -z "$RESPONSE" ] || [ "$RESPONSE" = "000" ]; then
               echo "Error: No response from Supabase (project may be paused)"
               exit 1
