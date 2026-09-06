@@ -102,11 +102,11 @@
     <div class="spacer"></div>
 
     <h1>Política de Privacidad</h1>
-    <span class="updated">Última actualización: 5 de abril de 2026</span>
-    <span class="effective">Fecha de vigencia: 5 de abril de 2026</span>
+    <span class="updated">Última actualización: 6 de septiembre de 2026</span>
+    <span class="effective">Fecha de vigencia: 6 de septiembre de 2026</span>
 
     <div class="highlight">
-      <p><strong>Compromiso de privacidad:</strong> Zenith Finance 360 fue diseñada con un principio fundamental: tu información financiera es exclusivamente tuya. No recopilamos, transmitimos, almacenamos ni procesamos ningún dato personal en servidores externos. Toda tu información permanece en tu dispositivo bajo tu control absoluto.</p>
+      <p><strong>Compromiso de privacidad:</strong> Zenith Finance 360 fue diseñada con un principio fundamental: tu información financiera es exclusivamente tuya. Tus cuentas, movimientos, presupuestos y metas se guardan en tu dispositivo y, si lo tienes activado, en tu propio iCloud — nunca en servidores nuestros. No hay cuentas de usuario, publicidad ni rastreo. La única función que envía información a internet es el <strong>escáner de recibos</strong>, opcional, que transmite únicamente la foto que tú decides escanear y no la almacena.</p>
     </div>
 
     <!-- ── 1. ALCANCE ── -->
@@ -115,13 +115,14 @@
     <p>Al descargar, instalar o utilizar la Aplicación, aceptas las prácticas descritas en esta política. Si no estás de acuerdo con algún término, te recomendamos no utilizar la Aplicación.</p>
 
     <!-- ── 2. ARQUITECTURA ── -->
-    <h2>2. Arquitectura de datos: 100% local</h2>
-    <p>La Aplicación opera bajo una arquitectura <strong>completamente offline y local</strong>. Esto significa que:</p>
+    <h2>2. Arquitectura de datos: local primero</h2>
+    <p>La Aplicación opera bajo una arquitectura <strong>local primero (offline-first)</strong>. Esto significa que:</p>
     <ul>
-      <li><strong>No existen servidores backend</strong> — la Aplicación no se conecta a ningún servidor propio para enviar o recibir datos.</li>
-      <li><strong>No existe base de datos en la nube</strong> — no hay Firebase, AWS, Azure ni ningún servicio de almacenamiento remoto.</li>
+      <li><strong>Tus datos financieros no se envían a servidores nuestros</strong> — cuentas, movimientos, presupuestos, metas y preferencias se guardan en el almacenamiento local de tu dispositivo.</li>
+      <li><strong>Sincronización opcional con tu iCloud</strong> — si tienes sesión de iCloud, la Aplicación replica esos datos en tu propio <em>iCloud Key-Value Store</em>, cifrado por Apple y asociado a tu Apple ID. El Desarrollador no tiene acceso a ese almacenamiento.</li>
       <li><strong>No existe sistema de cuentas de usuario</strong> — no se requiere registro, inicio de sesión ni autenticación contra servidores externos.</li>
       <li><strong>No existe telemetría ni analytics</strong> — no usamos Google Analytics, Mixpanel, Amplitude ni ningún servicio de rastreo.</li>
+      <li><strong>Una sola función usa internet: el escáner de recibos</strong> — ver secciones 5 y 6. Puedes usar toda la Aplicación sin activarla.</li>
     </ul>
 
     <!-- ── 3. DATOS ALMACENADOS ── -->
@@ -186,7 +187,7 @@
       <li>Nombre, dirección, correo electrónico ni número de teléfono</li>
       <li>Identificadores de dispositivo (IDFA, IDFV, UUID)</li>
       <li>Ubicación geográfica (GPS, IP, Wi-Fi)</li>
-      <li>Contactos, fotos, calendario ni ningún dato de otras aplicaciones</li>
+      <li>Contactos, calendario, tu galería de fotos ni ningún dato de otras aplicaciones (la cámara solo se usa cuando tú eliges escanear un recibo; la imagen no se guarda en tu galería ni en servidores)</li>
       <li>Credenciales bancarias, números de cuenta ni datos de tarjetas reales</li>
       <li>Historial de navegación ni actividad en otras aplicaciones</li>
       <li>Datos biométricos (Face ID / Touch ID los gestiona iOS directamente)</li>
@@ -196,7 +197,7 @@
 
     <!-- ── 5. SERVICIOS EXTERNOS ── -->
     <h2>5. Conexiones de red y servicios externos</h2>
-    <p>La Aplicación realiza las siguientes conexiones de red mínimas e indispensables para su funcionamiento visual:</p>
+    <p>La Aplicación realiza únicamente las siguientes conexiones de red:</p>
 
     <table class="data-table">
       <thead>
@@ -208,24 +209,48 @@
       </thead>
       <tbody>
         <tr>
+          <td>Escáner de recibos — Supabase Edge Functions (supabase.co)</td>
+          <td>Recibir la foto del recibo que tú tomas y reenviarla al modelo de visión para extraer fecha, comercio, monto, moneda y categoría</td>
+          <td><span class="badge-min">Solo al escanear</span> — la imagen del recibo (cifrada en tránsito por HTTPS) y el idioma de la interfaz. No se envía tu nombre, tus cuentas ni tus saldos.</td>
+        </tr>
+        <tr>
+          <td>Escáner de recibos — Anthropic Claude API (api.anthropic.com)</td>
+          <td>Análisis de la imagen del recibo (reconocimiento de texto) por parte del modelo de IA</td>
+          <td><span class="badge-min">Solo al escanear</span> — la misma imagen, reenviada por nuestra función. Procesada conforme a la <a href="https://www.anthropic.com/legal/commercial-terms" target="_blank" rel="noopener">política comercial de Anthropic</a>; Anthropic no usa datos de API para entrenar modelos.</td>
+        </tr>
+        <tr>
+          <td>iCloud Key-Value Store (Apple)</td>
+          <td>Sincronizar tus datos entre tu iPhone y tu iPad</td>
+          <td><span class="badge-local">Tu iCloud</span> — copia cifrada de tus datos en tu propia cuenta de Apple; inaccesible para el Desarrollador</td>
+        </tr>
+        <tr>
           <td>Google Fonts (fonts.googleapis.com)</td>
           <td>Carga de fuente de iconos Material Symbols para la interfaz</td>
-          <td><span class="badge-min">Mínimo</span> — solo la solicitud HTTP estándar (IP, user-agent del navegador)</td>
+          <td><span class="badge-min">Mínimo</span> — solo la solicitud HTTP estándar (IP, user-agent)</td>
         </tr>
       </tbody>
     </table>
+
+    <h3>Cómo funciona el escáner de recibos</h3>
+    <p>Cuando tocas «Escanear recibo» y tomas una foto, la imagen viaja cifrada (HTTPS) a una función que operamos en Supabase, que la reenvía a la API de Anthropic para extraer los datos del recibo. El resultado vuelve a tu dispositivo y tú lo revisas antes de guardarlo. <strong>Ni la imagen ni el resultado se almacenan en servidores</strong>: nuestra función no tiene base de datos y no persiste la imagen; Supabase conserva registros técnicos de la petición (dirección IP, fecha y hora, código de respuesta) según su política de retención de logs, sin el contenido de la imagen. Cada escaneo es una decisión tuya; siempre puedes ingresar el movimiento manualmente.</p>
 
     <p><strong>Nota importante:</strong> En la solicitud a Google Fonts, no se envía ningún dato personal, financiero ni identificador único de la Aplicación. Google puede procesar la dirección IP según su propia <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidad</a>. No tenemos control sobre el procesamiento de datos por parte de Google en esta solicitud mínima.</p>
 
     <!-- ── 6. COMPARTIR DATOS ── -->
     <h2>6. Compartir datos con terceros</h2>
-    <p><strong>No compartimos, vendemos, alquilamos, intercambiamos ni transferimos ningún dato a terceros</strong>, ya que no recopilamos ningún dato. Esto incluye:</p>
+    <p><strong>No vendemos, alquilamos ni intercambiamos ningún dato con terceros.</strong> Los únicos terceros que procesan datos, y solo cuando tú usas el escáner de recibos, son nuestros encargados de tratamiento:</p>
+    <ul>
+      <li><strong>Supabase, Inc.</strong> (EE. UU.) — aloja la función que recibe la foto del recibo. <a href="https://supabase.com/privacy" target="_blank" rel="noopener">Política de privacidad de Supabase</a>.</li>
+      <li><strong>Anthropic, PBC</strong> (EE. UU.) — analiza la imagen del recibo. <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Política de privacidad de Anthropic</a>.</li>
+      <li><strong>Apple Inc.</strong> — iCloud, únicamente si activas la sincronización; los datos están en tu propia cuenta, cifrados, y Apple los trata según su <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">política de privacidad</a>.</li>
+    </ul>
+    <p>Además:</p>
     <ul>
       <li>No vendemos datos a intermediarios de datos (data brokers)</li>
       <li>No compartimos datos con redes publicitarias</li>
       <li>No proporcionamos datos a redes sociales</li>
       <li>No transferimos datos a empresas matrices, subsidiarias ni socios comerciales</li>
-      <li>No entregamos datos a gobiernos ni autoridades (no hay datos que entregar)</li>
+      <li>No entregamos datos a gobiernos ni autoridades: no almacenamos tus datos financieros en servidores, por lo que no hay datos que entregar</li>
     </ul>
 
     <!-- ── 7. SEGURIDAD ── -->
@@ -306,12 +331,12 @@
 
     <!-- ── 11. MENORES ── -->
     <h2>11. Menores de edad</h2>
-    <p>La Aplicación no está dirigida a menores de 13 años. No obstante, dado que no recopilamos ningún dato personal de ningún usuario, no existe riesgo de recopilación de información de menores.</p>
+    <p>La Aplicación no está dirigida a menores de 13 años. No mantenemos cuentas de usuario ni almacenamos datos personales en servidores, por lo que no recopilamos de forma consciente información de menores. Si un tutor considera que un menor ha usado el escáner de recibos, puede contactarnos para atender cualquier inquietud.</p>
     <p>Si un menor utiliza la Aplicación, toda la información que registre permanecerá exclusivamente en el dispositivo, bajo las mismas protecciones de privacidad que cualquier otro usuario.</p>
 
     <!-- ── 12. TRANSFERENCIAS INTERNACIONALES ── -->
     <h2>12. Transferencias internacionales de datos</h2>
-    <p><strong>No realizamos transferencias internacionales de datos.</strong> Dado que no recopilamos ni almacenamos datos en servidores, no hay datos que transferir entre jurisdicciones. Tus datos residen exclusivamente en tu dispositivo físico, en la jurisdicción donde te encuentres.</p>
+    <p>Tus datos financieros residen en tu dispositivo (y, si lo activas, en tu iCloud) y no se transfieren a servidores nuestros. <strong>La única transferencia internacional ocurre cuando usas el escáner de recibos:</strong> la imagen se procesa en servidores de Supabase y Anthropic ubicados en Estados Unidos, únicamente durante el tiempo necesario para extraer los datos, y no se almacena. Al usar el escáner, consientes ese tratamiento puntual.</p>
 
     <!-- ── 13. CUMPLIMIENTO ── -->
     <h2>13. Cumplimiento normativo</h2>
@@ -339,21 +364,21 @@
     <details>
       <summary>¿Los datos se sincronizan con iCloud?</summary>
       <div class="detail-content">
-        <p>No. La Aplicación no utiliza iCloud ni ningún servicio de sincronización en la nube. Si cambias de dispositivo, necesitarás exportar tus datos manualmente e importarlos en el nuevo dispositivo.</p>
+        <p>Sí, de forma opcional y automática. Si tu iPhone y tu iPad usan el mismo Apple ID con iCloud activo, la Aplicación mantiene tus datos sincronizados usando el almacenamiento iCloud de tu propia cuenta, cifrado por Apple. El Desarrollador no puede ver ni acceder a esos datos. Para desactivarlo, cierra sesión de iCloud o desactiva iCloud Drive para la Aplicación en Ajustes de iOS. También puedes exportar e importar respaldos manualmente.</p>
       </div>
     </details>
 
     <details>
       <summary>¿Pueden acceder a mis datos mediante una orden judicial?</summary>
       <div class="detail-content">
-        <p>No mantenemos servidores ni bases de datos, por lo que no tenemos datos que entregar ante ninguna solicitud legal. Tus datos solo existen en tu dispositivo físico y están protegidos por la seguridad de iOS.</p>
+        <p>No almacenamos tus datos financieros en servidores ni bases de datos, por lo que no tenemos datos que entregar ante ninguna solicitud legal. Tus datos existen en tu dispositivo (y en tu propio iCloud si lo activas), protegidos por la seguridad de iOS y de Apple.</p>
       </div>
     </details>
 
     <details>
       <summary>¿La app funciona sin conexión a internet?</summary>
       <div class="detail-content">
-        <p>Sí. La Aplicación funciona completamente sin conexión a internet. La única conexión de red es la carga inicial de iconos desde Google Fonts, que se almacenan en caché del navegador. Después de la primera carga, la app puede funcionar completamente offline.</p>
+        <p>Sí. Todas las funciones —cuentas, movimientos, presupuesto, metas, importación de texto y PDF— funcionan sin internet. La única excepción es el <strong>escáner de recibos</strong>, que necesita conexión para analizar la foto; sin conexión la app te lo indica y puedes ingresar el movimiento manualmente.</p>
       </div>
     </details>
 
