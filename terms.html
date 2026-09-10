@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Términos y Condiciones — Zenith Finance 360</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#030612;color:#e2e4f9;line-height:1.8}
+    .container{max-width:760px;margin:0 auto;padding:60px 24px 80px}
+
+    /* Nav mini */
+    .top-bar{position:fixed;top:0;left:0;right:0;z-index:50;padding:14px 24px;background:rgba(3,6,18,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.05)}
+    .top-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .top-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .top-brand img{width:30px;height:30px;border-radius:8px}
+    .top-brand span{font-size:0.9rem;font-weight:700;color:#fff}
+    .back-link{font-size:0.8rem;color:rgba(255,255,255,0.4);text-decoration:none;transition:color .2s}
+    .back-link:hover{color:#64CEFB}
+
+    /* Content */
+    .spacer{height:80px}
+    h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;color:#f1f5f9;letter-spacing:-0.03em;margin-bottom:8px}
+    .updated{font-size:0.8rem;color:rgba(255,255,255,0.3);margin-bottom:40px;display:block}
+    .effective{font-size:0.8rem;color:rgba(255,255,255,0.3);margin-bottom:48px;display:block}
+
+    /* Highlight box */
+    .highlight{background:rgba(52,211,153,0.04);border:1px solid rgba(52,211,153,0.12);border-radius:16px;padding:24px 28px;margin:0 0 48px}
+    .highlight p{color:#c8d0e8;margin:0;font-size:0.92rem;line-height:1.7}
+    .highlight strong{color:#34d399}
+
+    /* Sections */
+    h2{font-size:1.1rem;font-weight:700;color:#64CEFB;margin-top:40px;margin-bottom:14px;letter-spacing:-0.01em}
+    h3{font-size:0.95rem;font-weight:600;color:#f1f5f9;margin-top:20px;margin-bottom:8px}
+    p,li{font-size:0.9rem;color:rgba(255,255,255,0.55);margin-bottom:12px;line-height:1.8}
+    ul{padding-left:20px;margin-bottom:16px}
+    li{margin-bottom:8px}
+    li strong{color:rgba(255,255,255,0.7)}
+
+    /* Table */
+    .data-table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:0.85rem}
+    .data-table th{text-align:left;padding:10px 14px;background:rgba(255,255,255,0.04);color:rgba(255,255,255,0.6);font-weight:600;border-bottom:1px solid rgba(255,255,255,0.08);font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em}
+    .data-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);color:rgba(255,255,255,0.5)}
+    .data-table tr:hover td{background:rgba(255,255,255,0.02)}
+    .badge-local{display:inline-block;background:rgba(52,211,153,0.1);color:#34d399;font-size:0.7rem;font-weight:600;padding:2px 8px;border-radius:6px}
+    .badge-none{display:inline-block;background:rgba(244,63,94,0.08);color:#fb7185;font-size:0.7rem;font-weight:600;padding:2px 8px;border-radius:6px}
+    .badge-min{display:inline-block;background:rgba(251,191,36,0.08);color:#fbbf24;font-size:0.7rem;font-weight:600;padding:2px 8px;border-radius:6px}
+
+    /* Accordion */
+    details{margin-bottom:12px;border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden}
+    summary{padding:14px 18px;font-size:0.9rem;font-weight:600;color:#f1f5f9;cursor:pointer;background:rgba(255,255,255,0.02);transition:background .2s;list-style:none}
+    summary::-webkit-details-marker{display:none}
+    summary::before{content:'▸';margin-right:10px;color:#64CEFB;display:inline-block;transition:transform .2s}
+    details[open] summary::before{transform:rotate(90deg)}
+    summary:hover{background:rgba(255,255,255,0.04)}
+    details .detail-content{padding:16px 18px;border-top:1px solid rgba(255,255,255,0.04)}
+    details .detail-content p{margin-bottom:8px}
+    details .detail-content p:last-child{margin-bottom:0}
+
+    /* Rights icons */
+    .rights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0 28px}
+    .right-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:18px;text-align:center}
+    .right-card .icon{font-size:1.6rem;margin-bottom:8px}
+    .right-card h4{font-size:0.85rem;font-weight:700;color:#f1f5f9;margin-bottom:4px}
+    .right-card p{font-size:0.78rem;color:rgba(255,255,255,0.4);margin:0}
+
+    /* Divider */
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(100,206,251,0.15),transparent);margin:48px 0}
+
+    /* Footer */
+    .footer{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);text-align:center}
+    .footer p{font-size:0.75rem;color:rgba(255,255,255,0.2);margin-bottom:6px}
+    .footer a{color:rgba(255,255,255,0.3);text-decoration:none;font-size:0.75rem;transition:color .2s}
+    .footer a:hover{color:#64CEFB}
+
+    a{color:#64CEFB;text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    @media(max-width:640px){
+      .container{padding:60px 18px 60px}
+      .rights-grid{grid-template-columns:1fr}
+      .data-table{font-size:0.78rem}
+      .data-table th,.data-table td{padding:8px 10px}
+    }
+  </style>
+</head>
+<body>
+  <!-- Top bar -->
+  <div class="top-bar">
+    <div class="top-inner">
+      <a href="/" class="top-brand"><img src="logo.png" alt=""><span>Zenith Finance 360</span></a>
+      <a href="/" class="back-link">&larr; Volver al inicio</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="spacer"></div>
+
+    <h1>Términos y Condiciones de Uso</h1>
+    <span class="updated">Última actualización: 10 de septiembre de 2026</span>
+    <span class="effective">Fecha de vigencia: 10 de septiembre de 2026</span>
+
+    <div class="highlight">
+      <p><strong>Lo esencial en una frase:</strong> Zenith Finance 360 es una herramienta para que organices y visualices tus propias finanzas. <strong>No es asesoría financiera, de inversión, fiscal ni legal</strong>, no es una institución financiera y no ejecuta operaciones con tu dinero. Los números que ves salen de la información que tú registras, y las decisiones que tomes con ellos son tuyas.</p>
+    </div>
+
+    <!-- ── 1 ── -->
+    <h2>1. Aceptación de estos términos</h2>
+    <p>Estos Términos y Condiciones (los "Términos") regulan el uso de la aplicación móvil Zenith Finance 360 para iOS y de este sitio web (conjuntamente, "la Aplicación"), desarrollada y distribuida por Antonio José Andrade Alfaro (en adelante, "nosotros" o "el Desarrollador").</p>
+    <p>Al descargar, instalar, acceder o utilizar la Aplicación aceptas quedar vinculado por estos Términos y por la <a href="privacy.html">Política de Privacidad</a>, que forma parte integral de este acuerdo. Si no estás de acuerdo con alguno de estos Términos, no utilices la Aplicación.</p>
+
+    <!-- ── 2 ── -->
+    <h2>2. Qué es y qué no es la Aplicación</h2>
+    <p>La Aplicación es una <strong>herramienta de organización y registro financiero personal</strong>. Su función es permitirte anotar tus cuentas, movimientos, presupuestos y metas, y presentarte esa información de forma ordenada mediante resúmenes, gráficas, categorías y avisos automáticos.</p>
+    <h3>La Aplicación NO es:</h3>
+    <ul>
+      <li>Un banco, cooperativa, entidad financiera, casa de bolsa, asesor de inversiones ni intermediario financiero de ningún tipo.</li>
+      <li>Un servicio de asesoría financiera, de inversión, fiscal, contable o legal.</li>
+      <li>Un medio de pago. La Aplicación no envía, recibe, transfiere, convierte ni custodia dinero. Cuando registras un "pago de tarjeta" o una "transferencia", estás anotando un movimiento que ocurrió fuera de la Aplicación, no ejecutándolo.</li>
+      <li>Un servicio conectado a tus bancos. La Aplicación no accede a tus cuentas bancarias reales ni obtiene tus saldos automáticamente. Toda la información proviene de lo que tú capturas o pegas manualmente.</li>
+      <li>Un sustituto del criterio de un profesional acreditado.</li>
+    </ul>
+
+    <!-- ── 3 ── -->
+    <h2>3. Ausencia de asesoría financiera</h2>
+    <p>Los resúmenes, proyecciones, porcentajes, semáforos de gasto, alertas del coach financiero, sugerencias de categoría y cualquier otro contenido generado por la Aplicación tienen <strong>fines exclusivamente informativos y de organización personal</strong>.</p>
+    <ul>
+      <li>No constituyen una recomendación de compra, venta, inversión, endeudamiento, ahorro ni de ninguna otra decisión financiera.</li>
+      <li>Se calculan únicamente a partir de los datos que tú registras. Si tus datos son incompletos, están desactualizados o son incorrectos, los resultados también lo estarán.</li>
+      <li>Las proyecciones son estimaciones matemáticas basadas en tu comportamiento pasado registrado. No predicen el futuro ni garantizan ningún resultado.</li>
+      <li>Los tipos de cambio son los que tú configuras manualmente. No son cotizaciones oficiales ni se actualizan en tiempo real.</li>
+    </ul>
+    <p><strong>Antes de tomar cualquier decisión financiera relevante, consulta a un profesional debidamente acreditado en tu jurisdicción.</strong> El Desarrollador no asume responsabilidad alguna por decisiones tomadas con base en la información mostrada por la Aplicación.</p>
+
+    <!-- ── 4 ── -->
+    <h2>4. Elegibilidad</h2>
+    <p>Para utilizar la Aplicación debes tener la capacidad legal para celebrar un contrato vinculante conforme a la legislación de tu país de residencia. Si eres menor de edad, únicamente podrás utilizar la Aplicación con el consentimiento y bajo la supervisión de tu padre, madre o tutor legal, quien asumirá la responsabilidad por el cumplimiento de estos Términos.</p>
+    <p>La Aplicación no está dirigida a menores de 13 años y no recopila conscientemente información de personas de esa edad.</p>
+
+    <!-- ── 5 ── -->
+    <h2>5. Licencia de uso</h2>
+    <p>Sujeto al cumplimiento de estos Términos, el Desarrollador te concede una licencia <strong>limitada, personal, intransferible, no exclusiva y revocable</strong> para instalar y utilizar la Aplicación en dispositivos Apple que poseas o controles, conforme a las Reglas de Uso del App Store de Apple.</p>
+    <p>Esta licencia no constituye una venta. El Desarrollador conserva todos los derechos que no se te otorgan expresamente.</p>
+
+    <!-- ── 6 ── -->
+    <h2>6. Uso aceptable</h2>
+    <p>Te comprometes a no:</p>
+    <ul>
+      <li>Realizar ingeniería inversa, descompilar, desensamblar o intentar extraer el código fuente de la Aplicación, salvo en la medida en que la ley aplicable lo permita expresamente.</li>
+      <li>Copiar, clonar, modificar, distribuir, sublicenciar, vender o alquilar la Aplicación o cualquiera de sus componentes.</li>
+      <li>Utilizar la marca, el logotipo, el nombre o la identidad visual de Zenith Finance 360 sin autorización escrita.</li>
+      <li>Utilizar la Aplicación para registrar, procesar u organizar información proveniente de actividades ilícitas, incluyendo lavado de dinero, evasión fiscal o financiamiento de actividades prohibidas.</li>
+      <li>Interferir con el funcionamiento de la Aplicación, sobrecargar deliberadamente los servicios asociados o eludir sus medidas de seguridad.</li>
+      <li>Utilizar la función de escáner de recibos para enviar imágenes que no sean recibos, facturas o comprobantes de pago, o que contengan material ilegal.</li>
+    </ul>
+    <p>El incumplimiento de esta sección faculta al Desarrollador a suspender o revocar tu licencia de uso.</p>
+
+    <!-- ── 7 ── -->
+    <h2>7. Escáner de recibos y servicios de terceros</h2>
+    <p>La Aplicación incluye una función <strong>opcional</strong> de escáner de recibos. Al utilizarla, la fotografía que tú eliges se transmite de forma cifrada a nuestra función en Supabase, que la reenvía a la API de Anthropic para extraer fecha, comercio, monto, moneda y categoría sugerida. Ni la imagen ni el resultado se almacenan en servidores del Desarrollador. El detalle completo está en la <a href="privacy.html">Política de Privacidad</a>.</p>
+    <ul>
+      <li>El uso de esta función <strong>es voluntario</strong>. Toda la Aplicación funciona sin ella.</li>
+      <li>El resultado del escaneo es una <strong>sugerencia</strong> que tú debes revisar y confirmar antes de guardarla. La extracción automática puede contener errores.</li>
+      <li>Requiere conexión a internet y permiso de cámara. Sin ellos, la función simplemente no está disponible.</li>
+      <li>El Desarrollador no controla la disponibilidad ni el desempeño de los proveedores de terceros, y puede modificar, limitar o descontinuar esta función.</li>
+      <li>Al usar esta función te comprometes a no fotografiar documentos que contengan datos de terceros sin su autorización.</li>
+    </ul>
+
+    <!-- ── 8 ── -->
+    <h2>8. Tus datos y tus respaldos</h2>
+    <p>La información que registras en la Aplicación se guarda en el almacenamiento local de tu dispositivo y, si tienes iCloud activo, se replica en tu propio iCloud Key-Value Store. El Desarrollador no tiene acceso a esa información y, por lo tanto, <strong>no puede recuperarla por ti</strong>.</p>
+    <ul>
+      <li>Eres el único responsable de generar y custodiar tus respaldos mediante la función de exportación a JSON.</li>
+      <li>Desinstalar la Aplicación, restablecer el dispositivo, cerrar sesión de iCloud o borrar los datos de la Aplicación puede provocar la <strong>pérdida definitiva e irrecuperable</strong> de tu información.</li>
+      <li>El Desarrollador no será responsable por la pérdida de datos derivada de fallos del dispositivo, del sistema operativo, de iCloud, de la desinstalación de la Aplicación ni de la ausencia de respaldos.</li>
+      <li>Eres responsable de la exactitud de la información que registras.</li>
+    </ul>
+
+    <!-- ── 9 ── -->
+    <h2>9. Propiedad intelectual</h2>
+    <p>La Aplicación, su código fuente, diseño, interfaz, identidad visual, marca, logotipo, textos y demás elementos son propiedad del Desarrollador y están protegidos por la legislación de derechos de autor y propiedad industrial aplicable, incluyendo el Convenio de Berna y las leyes nacionales correspondientes.</p>
+    <p><strong>Tu contenido sigue siendo tuyo.</strong> Los datos financieros que registras te pertenecen íntegramente. El Desarrollador no reclama ningún derecho sobre ellos ni obtiene licencia alguna para usarlos.</p>
+    <p>Para reportar infracciones de propiedad intelectual: <a href="mailto:contacto@zenithfinance360.com">contacto@zenithfinance360.com</a></p>
+
+    <div class="divider"></div>
+
+    <!-- ── 10 ── -->
+    <h2>10. Disponibilidad y cambios en la Aplicación</h2>
+    <p>El Desarrollador procura mantener la Aplicación operativa, pero no garantiza disponibilidad ininterrumpida ni libre de errores. Nos reservamos el derecho de modificar, suspender o descontinuar la Aplicación o cualquiera de sus funciones, total o parcialmente, en cualquier momento.</p>
+    <p>Las funciones que dependen de internet, como el escáner de recibos, pueden verse afectadas por causas ajenas a nuestro control, incluyendo fallos de proveedores externos, de tu conexión o de tu operador.</p>
+
+    <!-- ── 11 ── -->
+    <h2>11. Precio, compras y reembolsos</h2>
+    <p>La Aplicación se distribuye exclusivamente a través del App Store de Apple. Cualquier compra, precio, impuesto, facturación o solicitud de reembolso se rige por los términos de Apple y se gestiona directamente con Apple.</p>
+    <p>El Desarrollador no procesa pagos, no almacena datos de tarjetas y no puede emitir reembolsos. Las solicitudes de reembolso deben dirigirse a Apple a través de <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener">reportaproblem.apple.com</a>.</p>
+
+    <!-- ── 12 ── -->
+    <h2>12. Exclusión de garantías</h2>
+    <p>La Aplicación se proporciona <strong>"tal cual" y "según disponibilidad"</strong>, sin garantías de ningún tipo, expresas o implícitas, incluyendo sin limitación las garantías de comerciabilidad, idoneidad para un propósito particular, exactitud, disponibilidad continua o ausencia de errores.</p>
+    <p>El Desarrollador no garantiza que los cálculos, proyecciones, categorizaciones automáticas, conversiones de moneda o resultados del escáner de recibos sean exactos, completos o adecuados para tu situación particular.</p>
+    <p>En jurisdicciones que no permiten la exclusión de garantías implícitas, estas exclusiones se aplicarán en la máxima medida permitida por la ley.</p>
+
+    <!-- ── 13 ── -->
+    <h2>13. Limitación de responsabilidad</h2>
+    <p>En la máxima medida permitida por la legislación aplicable, el Desarrollador no será responsable por daños indirectos, incidentales, especiales, consecuenciales o punitivos, ni por pérdida de beneficios, de ingresos, de oportunidades o de datos, derivados de:</p>
+    <ul>
+      <li>Decisiones financieras tomadas con base en la información mostrada por la Aplicación.</li>
+      <li>Errores, omisiones o inexactitudes en los datos que tú registraste.</li>
+      <li>Resultados incorrectos del escáner de recibos, de la categorización automática o de las conversiones de moneda.</li>
+      <li>Pérdida de datos por cualquier causa, incluida la ausencia de respaldos.</li>
+      <li>Interrupciones, indisponibilidad o mal funcionamiento de la Aplicación o de servicios de terceros.</li>
+      <li>Acceso no autorizado a tu dispositivo por parte de terceros.</li>
+    </ul>
+    <p>En todo caso, la responsabilidad total y acumulada del Desarrollador quedará limitada al monto que hayas pagado por la Aplicación durante los doce meses anteriores al hecho que originó el reclamo o, si la Aplicación fue gratuita, a cero.</p>
+
+    <!-- ── 14 ── -->
+    <h2>14. Indemnización</h2>
+    <p>Te comprometes a mantener indemne al Desarrollador frente a cualquier reclamo, demanda, pérdida o gasto, incluidos honorarios legales razonables, que se derive de tu uso indebido de la Aplicación, de tu incumplimiento de estos Términos o de tu vulneración de derechos de terceros.</p>
+
+    <div class="divider"></div>
+
+    <!-- ── 15 ── -->
+    <h2>15. Condiciones específicas de Apple</h2>
+    <p>Conforme a los requisitos de Apple Inc. para aplicaciones distribuidas en el App Store, reconoces y aceptas expresamente que:</p>
+    <ul>
+      <li>Estos Términos se celebran <strong>únicamente entre tú y el Desarrollador</strong>, no con Apple. El Desarrollador, y no Apple, es el único responsable de la Aplicación y de su contenido.</li>
+      <li>Apple <strong>no tiene obligación alguna de prestar servicios de mantenimiento o soporte</strong> respecto de la Aplicación.</li>
+      <li>Si la Aplicación no cumple con alguna garantía aplicable, puedes notificarlo a Apple, que podrá reembolsarte el precio de compra. En la máxima medida permitida por la ley, Apple no tendrá ninguna otra obligación de garantía respecto de la Aplicación.</li>
+      <li>El Desarrollador, y no Apple, es responsable de atender cualquier reclamo relacionado con la Aplicación, incluyendo reclamos de responsabilidad por producto, incumplimiento normativo o protección al consumidor.</li>
+      <li>El Desarrollador, y no Apple, es responsable de la investigación, defensa y resolución de cualquier reclamo por infracción de propiedad intelectual de terceros.</li>
+      <li>Declaras que no te encuentras en un país sujeto a embargo del Gobierno de los Estados Unidos ni designado como país que apoya el terrorismo, y que no figuras en ninguna lista de partes prohibidas o restringidas de dicho gobierno.</li>
+      <li><strong>Apple y sus subsidiarias son terceros beneficiarios</strong> de estos Términos y tendrán derecho a hacerlos valer frente a ti como tercero beneficiario.</li>
+    </ul>
+
+    <!-- ── 16 ── -->
+    <h2>16. Terminación</h2>
+    <p>Puedes dar por terminados estos Términos en cualquier momento desinstalando la Aplicación. El Desarrollador puede suspender o revocar tu licencia si incumples estos Términos.</p>
+    <p>Las secciones sobre propiedad intelectual, exclusión de garantías, limitación de responsabilidad, indemnización y ley aplicable subsistirán tras la terminación.</p>
+
+    <!-- ── 17 ── -->
+    <h2>17. Modificaciones a estos Términos</h2>
+    <p>Nos reservamos el derecho de actualizar estos Términos. En caso de cambios actualizaremos la fecha de "Última actualización" en la parte superior y, si los cambios son significativos, lo comunicaremos mediante una nota dentro de la Aplicación. El uso continuado de la Aplicación tras la entrada en vigor implica tu aceptación de los Términos modificados.</p>
+
+    <!-- ── 18 ── -->
+    <h2>18. Ley aplicable y jurisdicción</h2>
+    <p>Estos Términos se rigen por las leyes de la República de Guatemala, sin perjuicio de sus normas sobre conflicto de leyes. Cualquier controversia derivada de estos Términos se someterá a los tribunales competentes de la Ciudad de Guatemala, Guatemala.</p>
+    <p>Si resides en un país cuya legislación de protección al consumidor te otorga derechos que no pueden ser limitados contractualmente, esas disposiciones prevalecerán en lo que te sean aplicables, y podrás acudir a los tribunales de tu lugar de residencia.</p>
+
+    <!-- ── 19 ── -->
+    <h2>19. Disposiciones generales</h2>
+    <ul>
+      <li><strong>Divisibilidad:</strong> si alguna cláusula de estos Términos se declara inválida o inejecutable, las restantes permanecerán en pleno vigor.</li>
+      <li><strong>Acuerdo íntegro:</strong> estos Términos y la Política de Privacidad constituyen el acuerdo completo entre tú y el Desarrollador respecto de la Aplicación.</li>
+      <li><strong>No renuncia:</strong> la falta de ejercicio de un derecho por parte del Desarrollador no constituye renuncia al mismo.</li>
+      <li><strong>Cesión:</strong> no puedes ceder estos Términos sin autorización escrita. El Desarrollador puede cederlos en caso de fusión, adquisición o transferencia de activos.</li>
+      <li><strong>Idioma:</strong> en caso de discrepancia entre versiones en distintos idiomas, prevalecerá la versión en español.</li>
+    </ul>
+
+    <!-- ── 20 ── -->
+    <h2>20. Contacto</h2>
+    <p>Si tienes preguntas sobre estos Términos y Condiciones, puedes escribirnos:</p>
+    <p><strong>Email:</strong> <a href="mailto:contacto@zenithfinance360.com">contacto@zenithfinance360.com</a></p>
+    <p>Nos comprometemos a responder todas las consultas en un plazo máximo de 30 días hábiles.</p>
+
+    <div class="footer">
+      <p>&copy; 2026 Zenith Finance 360. Todos los derechos reservados.</p>
+      <a href="/">Volver al inicio</a>
+    </div>
+  </div>
+</body>
+</html>
